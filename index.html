@@ -109,24 +109,61 @@
       font-weight: 700;
     }
 
-    /* === LOGO (substitui o quadrado anterior) === */
+    /* === LOGO (V2.2) COM EFEITO DE LUZ GARANTIDO === */
     .logo{
       width: 34px;
       height: 34px;
-      display: grid;
-      place-items: center;
       border-radius: 12px;
-      box-shadow: 0 12px 30px rgba(37,99,235,.20);
       position: relative;
       overflow: hidden;
-      background: transparent; /* importante: não muda nada do layout fora do logo */
+      display: grid;
+      place-items: center;
+      background: transparent;
+      box-shadow: 0 12px 30px rgba(37,99,235,.20);
     }
 
     .logo svg{
       width: 34px;
       height: 34px;
       display: block;
+      overflow: visible;
       filter: drop-shadow(0 0 18px rgba(109,40,217,.55));
+      position: relative;
+      z-index: 2; /* acima da luz CSS */
+    }
+
+    /* Luz “de capa” (igual ao antigo): passa por cima do logo inteiro */
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-80%;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.28), transparent 60%);
+      transform: translateX(-35%) rotate(15deg);
+      animation: shine 3.2s ease-in-out infinite;
+      z-index: 3;
+      pointer-events:none;
+      mix-blend-mode: screen;
+    }
+
+    /* Luz “interna” (dá mais presença em mobile) */
+    .logo::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.18), transparent 55%),
+                  radial-gradient(circle at 70% 80%, rgba(37,99,235,.18), transparent 55%);
+      filter: blur(4px);
+      opacity: .9;
+      z-index: 1;
+      pointer-events:none;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes shine{
+      0%   { transform: translateX(-45%) rotate(15deg); opacity: 0; }
+      20%  { opacity: .95; }
+      55%  { opacity: 0; }
+      100% { transform: translateX(45%) rotate(15deg); opacity: 0; }
     }
 
     .nav{
@@ -463,7 +500,7 @@
 
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
-      .fx, .grid, .hero::before, .btnPrimary::after { animation: none !important; }
+      .fx, .grid, .logo::after, .hero::before, .btnPrimary::after { animation: none !important; }
       .reveal{ opacity: 1; transform: none; transition: none; }
       .btn{ transition: none; }
     }
@@ -477,9 +514,9 @@
   <div class="wrap">
     <div class="topbar reveal">
       <div class="brand">
-        <!-- SUBSTITUÍDO AQUI: quadrado/gradiente antigo -> logo V2.2 -->
         <div class="logo" aria-hidden="true">
-          <svg viewBox="-18 -18 156 156" aria-label="Sansaflow Logo">
+          <!-- LOGO V2.2 inline -->
+          <svg viewBox="-10 -10 140 140" aria-label="Sansaflow Logo">
             <defs>
               <linearGradient id="origV2_22_idx" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#7c3aed"/>
@@ -493,7 +530,6 @@
                 <stop offset="100%" stop-color="#F59E0B"/>
               </linearGradient>
 
-              <!-- Luz por trás (V2.2) -->
               <linearGradient id="shineGradV2_22_idx" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
                 <stop offset="50%" stop-color="rgba(255,255,255,0.95)"/>
@@ -501,31 +537,25 @@
               </linearGradient>
 
               <clipPath id="clipAllV2_22_idx">
-                <rect x="-18" y="-18" width="156" height="156" rx="18" ry="18"></rect>
+                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
               </clipPath>
             </defs>
 
             <g clip-path="url(#clipAllV2_22_idx)">
-              <!-- Luz por trás -->
+              <!-- luz por trás (do logo) -->
               <g style="mix-blend-mode:screen; opacity:.85;">
-                <rect x="-140" y="-140" width="320" height="70"
+                <rect x="-120" y="-120" width="260" height="60"
                       fill="url(#shineGradV2_22_idx)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
-                    values="-160 -125; 160 -125" dur="2.6s" repeatCount="indefinite"/>
+                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
               </g>
 
-              <!-- Losango (tamanho atual) -->
               <polygon points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#origV2_22_idx)" stroke-width="4.5" opacity="0.95"/>
 
-              <!-- Núcleo ouro (original) -->
               <circle cx="60" cy="60" r="9.5" fill="url(#goldV2_22_idx)"/>
-
-              <!-- Esfera média -->
               <circle cx="60" cy="60" r="24" stroke="url(#origV2_22_idx)" stroke-width="2.2" fill="none" opacity="0.9"/>
-
-              <!-- Círculo maior -->
               <circle cx="60" cy="60" r="36" stroke="url(#origV2_22_idx)" stroke-width="1.9" fill="none" opacity="0.45"/>
             </g>
           </svg>
