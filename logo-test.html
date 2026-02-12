@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Sansaflow - Teste de Logos</title>
+<title>Sansaflow - Logo Fusion</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -23,27 +23,23 @@ body{
 }
 
 .container{
-  padding:80px 20px;
+  padding:120px 20px;
 }
 
 .logo-box{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  margin:60px auto;
-  padding:40px;
+  margin:auto;
+  padding:60px;
   max-width:300px;
-  border-radius:20px;
+  border-radius:25px;
   background:rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   border:1px solid rgba(255,255,255,0.1);
   transition:0.4s;
 }
 
 .logo-box:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 40px rgba(99,102,241,0.5);
+  transform:translateY(-10px);
+  box-shadow:0 0 60px rgba(109,40,217,0.7);
 }
 
 h1{
@@ -52,15 +48,9 @@ h1{
   letter-spacing:1px;
 }
 
-.logo-title{
-  margin-top:20px;
-  font-size:14px;
-  opacity:.7;
-}
-
-/* Glow effect */
+/* Glow geral */
 svg{
-  filter: drop-shadow(0 0 15px rgba(109,40,217,.6));
+  filter: drop-shadow(0 0 20px rgba(109,40,217,.7));
 }
 </style>
 </head>
@@ -68,68 +58,46 @@ svg{
 <body>
 
 <div class="container">
-<h1>Teste de Identidade - Sansaflow</h1>
+<h1>Logo Fusion - Sansaflow</h1>
 
-<!-- LOGO 1 - Monograma SF -->
 <div class="logo-box">
-<svg width="70" height="70" viewBox="0 0 100 100">
-<defs>
-<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" stop-color="#2563EB"/>
-<stop offset="100%" stop-color="#6D28D9"/>
-</linearGradient>
-</defs>
-<circle cx="50" cy="50" r="45" stroke="url(#grad1)" stroke-width="5" fill="none"/>
-<text x="50%" y="58%" text-anchor="middle" fill="url(#grad1)" font-size="38" font-weight="800">SF</text>
-</svg>
-<div class="logo-title">Monograma Premium</div>
-</div>
 
-<!-- LOGO 2 - Fluxo Tech -->
-<div class="logo-box">
-<svg width="70" height="70" viewBox="0 0 100 100">
-<defs>
-<linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" stop-color="#2563EB"/>
-<stop offset="100%" stop-color="#6D28D9"/>
-</linearGradient>
-</defs>
-<path d="M20 50 Q50 15 80 50 Q50 85 20 50Z" fill="none" stroke="url(#grad2)" stroke-width="6"/>
-</svg>
-<div class="logo-title">Fluxo & Automação</div>
-</div>
+<svg width="120" height="120" viewBox="0 0 100 100">
 
-<!-- LOGO 3 - Núcleo IA -->
-<div class="logo-box">
-<svg width="70" height="70" viewBox="0 0 100 100">
 <defs>
-<linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" stop-color="#2563EB"/>
-<stop offset="100%" stop-color="#6D28D9"/>
-</linearGradient>
-</defs>
-<circle cx="50" cy="50" r="12" fill="url(#grad3)"/>
-<circle cx="50" cy="50" r="30" stroke="url(#grad3)" stroke-width="3" fill="none"/>
-<circle cx="50" cy="50" r="45" stroke="url(#grad3)" stroke-width="2" fill="none" opacity="0.5"/>
-</svg>
-<div class="logo-title">Núcleo Inteligente</div>
-</div>
-
-<!-- LOGO 4 - Símbolo Luxo Minimal -->
-<div class="logo-box">
-<svg width="70" height="70" viewBox="0 0 100 100">
-<defs>
-<linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+<linearGradient id="luxTech" x1="0%" y1="0%" x2="100%" y2="100%">
 <stop offset="0%" stop-color="#FFD700"/>
-<stop offset="100%" stop-color="#B8860B"/>
+<stop offset="50%" stop-color="#6D28D9"/>
+<stop offset="100%" stop-color="#2563EB"/>
 </linearGradient>
 </defs>
-<polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="url(#grad4)" stroke-width="6"/>
+
+<!-- Estrutura Luxo (base do 4) -->
+<polygon points="50,5 95,50 50,95 5,50"
+         fill="none"
+         stroke="url(#luxTech)"
+         stroke-width="4"/>
+
+<!-- Núcleo Inteligente (base do 3) -->
+<circle cx="50" cy="50" r="10" fill="url(#luxTech)"/>
+<circle cx="50" cy="50" r="22"
+        stroke="url(#luxTech)"
+        stroke-width="2"
+        fill="none"
+        opacity="0.8"/>
+
+<circle cx="50" cy="50" r="35"
+        stroke="url(#luxTech)"
+        stroke-width="1.5"
+        fill="none"
+        opacity="0.4"/>
+
 </svg>
-<div class="logo-title">Luxo & Poder</div>
+
 </div>
 
 </div>
 
 </body>
 </html>
+
