@@ -72,26 +72,28 @@
       box-shadow:0 10px 30px rgba(0,0,0,.35);
     }
     .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;}
+
+    /* ===== LOGO (substitui o quadrado antigo, mantém o efeito de luz) ===== */
     .logo{
-      width:34px; height:34px; border-radius:12px;
-      background:
-        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
-        linear-gradient(135deg, rgba(37,99,235,.95), rgba(109,40,217,.95));
+      width:34px; height:34px;
+      display:grid; place-items:center;
+      border-radius:12px;
+      position:relative;
+      overflow:visible;
       box-shadow:0 12px 30px rgba(37,99,235,.20);
-      position:relative; overflow:hidden;
     }
-    .logo::after{
-      content:""; position:absolute; inset:-40%;
-      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.22), transparent 60%);
-      transform: rotate(15deg);
-      animation: shine 3.6s ease-in-out infinite;
+    .logo svg{
+      width:34px; height:34px;
+      display:block;
+      overflow:visible;
+      filter: drop-shadow(0 0 10px rgba(109,40,217,.55));
     }
-    @keyframes shine{
-      0%{transform:translateX(-30%) rotate(15deg);opacity:0}
-      35%{opacity:.85}
-      60%{opacity:0}
-      100%{transform:translateX(35%) rotate(15deg);opacity:0}
+    /* Luz (varredura) */
+    .logo .shineWrap{
+      mix-blend-mode: screen;
+      opacity: .95;
     }
+
     .nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;}
     .nav a{
       font-size:13px; color:var(--muted);
@@ -234,7 +236,8 @@
     .reveal.show{ opacity:1; transform:translateY(0); }
 
     @media (prefers-reduced-motion: reduce){
-      .fx,.grid,.logo::after,.hero::before,.btnPrimary::after{ animation:none !important; }
+      .fx,.grid,.hero::before,.btnPrimary::after{ animation:none !important; }
+      .logo .shineWrap *{ animation:none !important; }
       .reveal{ opacity:1; transform:none; transition:none; }
       .btn{ transition:none; }
     }
@@ -248,7 +251,61 @@
   <div class="wrap">
     <div class="topbar reveal">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <!-- ===== LOGO V2.2 (Centro ouro, luz por trás) ===== -->
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="-10 -10 140 140" aria-label="Sansaflow Logo" role="img">
+            <defs>
+              <linearGradient id="origLogoTermos" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7c3aed"/>
+                <stop offset="55%" stop-color="#2563eb"/>
+                <stop offset="100%" stop-color="#22d3ee"/>
+              </linearGradient>
+
+              <linearGradient id="goldLogoTermos" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFD700"/>
+                <stop offset="50%" stop-color="#FFB800"/>
+                <stop offset="100%" stop-color="#F59E0B"/>
+              </linearGradient>
+
+              <linearGradient id="shineLogoTermos" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+                <stop offset="50%" stop-color="rgba(255,255,255,0.95)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </linearGradient>
+
+              <clipPath id="clipLogoTermos">
+                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
+              </clipPath>
+            </defs>
+
+            <g clip-path="url(#clipLogoTermos)">
+              <!-- Luz por trás -->
+              <g class="shineWrap">
+                <rect x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineLogoTermos)" transform="rotate(25 60 60)">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
+                </rect>
+              </g>
+
+              <!-- Losango -->
+              <polygon
+                points="60,0 120,60 60,120 0,60"
+                fill="none" stroke="url(#origLogoTermos)" stroke-width="4.5" opacity="0.95"/>
+
+              <!-- Núcleo ouro -->
+              <circle cx="60" cy="60" r="9.5" fill="url(#goldLogoTermos)"/>
+
+              <!-- Esfera média -->
+              <circle cx="60" cy="60" r="24"
+                stroke="url(#origLogoTermos)" stroke-width="2.2" fill="none" opacity="0.9"/>
+
+              <!-- Círculo maior -->
+              <circle cx="60" cy="60" r="36"
+                stroke="url(#origLogoTermos)" stroke-width="1.9" fill="none" opacity="0.45"/>
+            </g>
+          </svg>
+        </div>
         <div>Sansaflow</div>
       </div>
       <div class="nav">
