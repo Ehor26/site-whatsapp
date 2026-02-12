@@ -3,177 +3,146 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sansaflow — V2.2 Ouro Premium</title>
+<title>Sansaflow — V2.2 Núcleo Ouro Metal</title>
 
 <style>
-body{
-  margin:0;
-  background: radial-gradient(circle at 30% 30%, #1e1b4b, #0b1220 70%);
-  font-family: Inter, Arial, sans-serif;
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:80px 20px;
-}
-
-h1{
-  margin-bottom:60px;
-  font-weight:800;
-  letter-spacing:.5px;
-}
-
-.grid{
-  display:flex;
-  gap:80px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.card{
-  text-align:center;
-}
-
-svg{
-  filter: drop-shadow(0 0 30px rgba(0,0,0,.6));
-}
-
-.label{
-  margin-bottom:20px;
-  font-weight:600;
-  opacity:.85;
-}
+  :root{
+    --bg1:#0b1220;
+    --bg2:#1b1550;
+    --bg3:#0b1220;
+  }
+  body{
+    margin:0;
+    font-family: Inter, Arial, sans-serif;
+    color:#fff;
+    background: linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+    background-size:400% 400%;
+    animation:bgMove 14s ease infinite;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:40px 16px;
+  }
+  @keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+  .card{
+    width:min(520px, 100%);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 34px 22px 26px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 18px 60px rgba(0,0,0,.55);
+    text-align:center;
+  }
+  h1{
+    margin:0 0 10px;
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:.4px;
+  }
+  p{
+    margin:0 0 22px;
+    opacity:.78;
+    font-size:13px;
+  }
+  svg{
+    filter: drop-shadow(0 0 18px rgba(109,40,217,.55));
+  }
+  .hint{
+    margin-top:16px;
+    opacity:.75;
+    font-size:12px;
+  }
 </style>
 </head>
 
 <body>
-
-<h1>Sansaflow — V2.2 Ouro Premium</h1>
-
-<div class="grid">
-
-  <!-- =========================
-       V2.2A — Ouro Premium Verde
-       ========================= -->
   <div class="card">
-    <div class="label">V2.2A — Ouro Premium</div>
+    <h1>V2.2 — Centro ouro (metal)</h1>
+    <p>Núcleo com aparência de metal (realista) sem reflexo animado.</p>
 
-    <svg width="160" height="160" viewBox="0 0 120 120">
+    <svg width="180" height="180" viewBox="0 0 120 120" aria-label="Logo V2.2 Ouro Metal">
       <defs>
-
-        <!-- Degradê Tech Original -->
-        <linearGradient id="orig" x1="0%" y1="0%" x2="100%" y2="100%">
+        <!-- Degradê TECH original -->
+        <linearGradient id="origV2" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#7c3aed"/>
           <stop offset="55%" stop-color="#2563eb"/>
           <stop offset="100%" stop-color="#22d3ee"/>
         </linearGradient>
 
-        <!-- OURO PREMIUM ESVERDEADO -->
-        <linearGradient id="goldPremium" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FFF9D6"/>
-          <stop offset="25%" stop-color="#E7C873"/>
-          <stop offset="55%" stop-color="#C6A84A"/>
-          <stop offset="75%" stop-color="#A38A2E"/>
-          <stop offset="100%" stop-color="#6E5F17"/>
+        <!-- OURO METÁLICO (escovado / metal) -->
+        <!-- truque: várias "faixas" com highlights e sombras para parecer metal -->
+        <linearGradient id="goldMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="#3f3207"/>
+          <stop offset="8%"   stop-color="#7b6511"/>
+          <stop offset="16%"  stop-color="#e9d07a"/>
+          <stop offset="24%"  stop-color="#b08a17"/>
+          <stop offset="33%"  stop-color="#fff3b5"/>
+          <stop offset="42%"  stop-color="#b48915"/>
+          <stop offset="52%"  stop-color="#f2d77f"/>
+          <stop offset="62%"  stop-color="#8f6f10"/>
+          <stop offset="74%"  stop-color="#ffeaa1"/>
+          <stop offset="86%"  stop-color="#a67d12"/>
+          <stop offset="100%" stop-color="#2f2405"/>
         </linearGradient>
 
-      </defs>
-
-      <!-- Losango -->
-      <polygon points="60,4 116,60 60,116 4,60"
-        fill="none"
-        stroke="url(#orig)"
-        stroke-width="4.5"
-        opacity="0.95"/>
-
-      <!-- Núcleo Ouro Premium -->
-      <circle cx="60" cy="60" r="10"
-        fill="url(#goldPremium)"/>
-
-      <!-- Esfera média -->
-      <circle cx="60" cy="60" r="24"
-        stroke="url(#orig)"
-        stroke-width="2.2"
-        fill="none"
-        opacity="0.9"/>
-
-      <!-- Círculo maior -->
-      <circle cx="60" cy="60" r="36"
-        stroke="url(#orig)"
-        stroke-width="1.9"
-        fill="none"
-        opacity="0.45"/>
-    </svg>
-  </div>
-
-
-  <!-- =========================
-       V2.2B — Ouro Premium + Reflexo
-       ========================= -->
-  <div class="card">
-    <div class="label">V2.2B — Ouro Premium + Reflexo</div>
-
-    <svg width="160" height="160" viewBox="0 0 120 120">
-      <defs>
-
-        <linearGradient id="orig2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#7c3aed"/>
-          <stop offset="55%" stop-color="#2563eb"/>
-          <stop offset="100%" stop-color="#22d3ee"/>
-        </linearGradient>
-
-        <!-- Ouro Premium -->
-        <linearGradient id="goldPremium2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FFFCE6"/>
-          <stop offset="30%" stop-color="#E7C873"/>
-          <stop offset="60%" stop-color="#C6A84A"/>
-          <stop offset="100%" stop-color="#6E5F17"/>
-        </linearGradient>
-
-        <!-- REFLEXO DINÂMICO -->
-        <radialGradient id="shine">
-          <stop offset="0%" stop-color="white" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="white" stop-opacity="0"/>
+        <!-- vinheta para dar profundidade "metal" -->
+        <radialGradient id="goldVignette" cx="35%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+          <stop offset="35%" stop-color="#ffffff" stop-opacity="0.10"/>
+          <stop offset="70%" stop-color="#000000" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#000000" stop-opacity="0.32"/>
         </radialGradient>
 
+        <!-- leve sombra interna -->
+        <filter id="innerShadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="1.2" result="blur"/>
+          <feOffset dx="0" dy="1" result="offset"/>
+          <feComposite in="offset" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="inner"/>
+          <feColorMatrix in="inner" type="matrix"
+            values="0 0 0 0 0
+                    0 0 0 0 0
+                    0 0 0 0 0
+                    0 0 0 .55 0" result="shadow"/>
+          <feComposite in="shadow" in2="SourceGraphic" operator="over"/>
+        </filter>
       </defs>
 
-      <!-- Losango -->
+      <!-- Losango (original) -->
       <polygon points="60,4 116,60 60,116 4,60"
         fill="none"
-        stroke="url(#orig2)"
+        stroke="url(#origV2)"
         stroke-width="4.5"
         opacity="0.95"/>
 
-      <!-- Núcleo Ouro Premium -->
-      <circle cx="60" cy="60" r="10"
-        fill="url(#goldPremium2)"/>
+      <!-- Núcleo (OURO METAL) -->
+      <g filter="url(#innerShadow)">
+        <circle cx="60" cy="60" r="10.2" fill="url(#goldMetal)"/>
+        <circle cx="60" cy="60" r="10.2" fill="url(#goldVignette)" opacity="0.9"/>
+      </g>
 
-      <!-- Reflexo animado -->
-      <circle cx="60" cy="50" r="5" fill="url(#shine)">
-        <animate attributeName="cy"
-                 values="50;60;50"
-                 dur="3s"
-                 repeatCount="indefinite"/>
-      </circle>
-
-      <!-- Esfera média -->
+      <!-- Esfera média (original) -->
       <circle cx="60" cy="60" r="24"
-        stroke="url(#orig2)"
+        stroke="url(#origV2)"
         stroke-width="2.2"
         fill="none"
         opacity="0.9"/>
 
-      <!-- Círculo maior -->
+      <!-- Círculo maior (original) -->
       <circle cx="60" cy="60" r="36"
-        stroke="url(#orig2)"
+        stroke="url(#origV2)"
         stroke-width="1.9"
         fill="none"
         opacity="0.45"/>
     </svg>
+
+    <div class="hint">Se quiser mais “metal escovado”, eu coloco micro-faixas (sem animação) no núcleo.</div>
   </div>
-
-</div>
-
 </body>
 </html>
+
