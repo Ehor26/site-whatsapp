@@ -3,19 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sansaflow - Logos (3 variações)</title>
+<title>Sansaflow - Logo Control</title>
 
 <style>
   :root{
     --bg1:#0b1220;
     --bg2:#1b1550;
     --bg3:#0b1220;
-
-    /* ============================
-       CONTROLE DO LOSANGO (GLOBAL)
-       ============================ */
-    --diamondCenter: 60;   /* NÃO mexa (centro do SVG) */
-    --diamondRadius: 56;   /* 56 = mantém exatamente: 60,4 116,60 60,116 4,60 */
   }
 
   body{
@@ -26,6 +20,7 @@
     background-size:400% 400%;
     animation:bgMove 14s ease infinite;
   }
+
   @keyframes bgMove{
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
@@ -41,18 +36,37 @@
   .title{
     text-align:center;
     font-weight:800;
-    letter-spacing:.6px;
-    margin:0 0 14px;
+    margin-bottom:8px;
   }
+
   .subtitle{
     text-align:center;
     opacity:.8;
-    margin:0 0 44px;
+    margin-bottom:40px;
+  }
+
+  .controlBox{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:18px;
+    margin-bottom:40px;
+    text-align:center;
+  }
+
+  .controlBox label{
+    font-weight:600;
+    display:block;
+    margin-bottom:10px;
+  }
+
+  input[type=range]{
+    width:320px;
   }
 
   .grid{
     display:grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap:18px;
   }
 
@@ -63,52 +77,23 @@
     padding: 26px 20px 22px;
     backdrop-filter: blur(14px);
     transition: .35s ease;
-    position:relative;
-    overflow:hidden;
+    text-align:center;
   }
-  .card:before{
-    content:"";
-    position:absolute;
-    inset:-80px;
-    background: radial-gradient(circle at 30% 20%, rgba(255,215,0,.08), transparent 55%),
-                radial-gradient(circle at 70% 70%, rgba(109,40,217,.12), transparent 55%);
-    filter: blur(10px);
-    pointer-events:none;
-  }
+
   .card:hover{
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: 0 18px 60px rgba(0,0,0,.55);
-    border-color: rgba(255,255,255,0.18);
   }
 
   .label{
-    text-align:center;
     font-weight:700;
-    margin: 0 0 16px;
-    letter-spacing:.2px;
+    margin-bottom:14px;
   }
 
-  .logoBox{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding: 18px 0 8px;
-  }
-
-  .hint{
-    text-align:center;
-    opacity:.75;
-    font-size:12px;
-    margin-top:10px;
-    line-height:1.35;
-  }
-
-  /* Glow global do SVG */
   svg{
     filter: drop-shadow(0 0 18px rgba(109,40,217,.55));
   }
 
-  /* responsivo */
   @media (max-width: 920px){
     .grid{ grid-template-columns: 1fr; }
   }
@@ -116,194 +101,132 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <h1 class="title">Sansaflow — Logo Fusion (3 variações)</h1>
-    <p class="subtitle">Losango maior e com folga do círculo externo + combinações de degradê conforme você pediu.</p>
+<div class="wrap">
 
-    <div class="grid">
+<h1 class="title">Sansaflow — Controle de Losango</h1>
+<p class="subtitle">Arraste o slider para aumentar ou diminuir o losango em tempo real.</p>
 
-      <!-- =========================
-           VARIAÇÃO 1
-           Losango: ouro
-           Esferas: degradê original
-           ========================= -->
-      <div class="card">
-        <div class="label">V1 — Losango ouro + esferas originais</div>
-        <div class="logoBox">
-          <svg width="140" height="140" viewBox="0 0 120 120" aria-label="Logo V1">
-            <defs>
-              <!-- Degradê ORIGINAL (esferas) -->
-              <linearGradient id="origV1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
+<div class="controlBox">
+  <label>Tamanho do Losango: <span id="sizeValue">56</span></label>
+  <input type="range" min="40" max="70" value="56" id="diamondSlider">
+</div>
 
-              <!-- Degradê OURO (losango) -->
-              <linearGradient id="goldV1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-            </defs>
+<div class="grid">
 
-            <!-- LOSANGO (AGORA CONTROLADO POR VARIÁVEL, SEM MUDAR DESIGN) -->
-            <polygon id="diamondV1"
-              points="60,4 116,60 60,116 4,60"
-              fill="none"
-              stroke="url(#goldV1)"
-              stroke-width="4.5"
-              opacity="0.95"/>
+<!-- V1 -->
+<div class="card">
+<div class="label">V1 — Losango ouro</div>
+<svg width="140" height="140" viewBox="0 0 120 120">
+<defs>
+<linearGradient id="origV1" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#7c3aed"/>
+<stop offset="55%" stop-color="#2563eb"/>
+<stop offset="100%" stop-color="#22d3ee"/>
+</linearGradient>
+<linearGradient id="goldV1" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#FFD700"/>
+<stop offset="50%" stop-color="#FFB800"/>
+<stop offset="100%" stop-color="#F59E0B"/>
+</linearGradient>
+</defs>
 
-            <!-- Núcleo -->
-            <circle cx="60" cy="60" r="9.5" fill="url(#origV1)"/>
+<polygon id="diamondV1"
+points="60,4 116,60 60,116 4,60"
+fill="none"
+stroke="url(#goldV1)"
+stroke-width="4.5"/>
 
-            <!-- Esfera média -->
-            <circle cx="60" cy="60" r="24"
-              stroke="url(#origV1)"
-              stroke-width="2.2"
-              fill="none"
-              opacity="0.9"/>
+<circle cx="60" cy="60" r="9.5" fill="url(#origV1)"/>
+<circle cx="60" cy="60" r="24" stroke="url(#origV1)" stroke-width="2.2" fill="none"/>
+<circle cx="60" cy="60" r="36" stroke="url(#origV1)" stroke-width="1.9" fill="none" opacity="0.45"/>
+</svg>
+</div>
 
-            <!-- Círculo maior (externo) -->
-            <circle cx="60" cy="60" r="36"
-              stroke="url(#origV1)"
-              stroke-width="1.9"
-              fill="none"
-              opacity="0.45"/>
-          </svg>
-        </div>
-        <div class="hint">✅ Losango maior + folga garantida (não encosta no círculo externo).</div>
-      </div>
+<!-- V2 -->
+<div class="card">
+<div class="label">V2 — Centro ouro</div>
+<svg width="140" height="140" viewBox="0 0 120 120">
+<defs>
+<linearGradient id="origV2" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#7c3aed"/>
+<stop offset="55%" stop-color="#2563eb"/>
+<stop offset="100%" stop-color="#22d3ee"/>
+</linearGradient>
+<linearGradient id="goldV2" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#FFD700"/>
+<stop offset="50%" stop-color="#FFB800"/>
+<stop offset="100%" stop-color="#F59E0B"/>
+</linearGradient>
+</defs>
 
-      <!-- =========================
-           VARIAÇÃO 2
-           Tudo no degradê original
-           Círculo central: ouro
-           ========================= -->
-      <div class="card">
-        <div class="label">V2 — Tudo original + centro ouro</div>
-        <div class="logoBox">
-          <svg width="140" height="140" viewBox="0 0 120 120" aria-label="Logo V2">
-            <defs>
-              <linearGradient id="origV2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
+<polygon id="diamondV2"
+points="60,4 116,60 60,116 4,60"
+fill="none"
+stroke="url(#origV2)"
+stroke-width="4.5"/>
 
-              <linearGradient id="goldV2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-            </defs>
+<circle cx="60" cy="60" r="9.5" fill="url(#goldV2)"/>
+<circle cx="60" cy="60" r="24" stroke="url(#origV2)" stroke-width="2.2" fill="none"/>
+<circle cx="60" cy="60" r="36" stroke="url(#origV2)" stroke-width="1.9" fill="none" opacity="0.45"/>
+</svg>
+</div>
 
-            <!-- Losango (AGORA CONTROLADO POR VARIÁVEL, SEM MUDAR DESIGN) -->
-            <polygon id="diamondV2"
-              points="60,4 116,60 60,116 4,60"
-              fill="none"
-              stroke="url(#origV2)"
-              stroke-width="4.5"
-              opacity="0.95"/>
+<!-- V3 -->
+<div class="card">
+<div class="label">V3 — Anel externo ouro</div>
+<svg width="140" height="140" viewBox="0 0 120 120">
+<defs>
+<linearGradient id="origV3" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#7c3aed"/>
+<stop offset="55%" stop-color="#2563eb"/>
+<stop offset="100%" stop-color="#22d3ee"/>
+</linearGradient>
+<linearGradient id="goldV3" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#FFD700"/>
+<stop offset="50%" stop-color="#FFB800"/>
+<stop offset="100%" stop-color="#F59E0B"/>
+</linearGradient>
+</defs>
 
-            <!-- Núcleo (OURO) -->
-            <circle cx="60" cy="60" r="9.5" fill="url(#goldV2)"/>
+<polygon id="diamondV3"
+points="60,4 116,60 60,116 4,60"
+fill="none"
+stroke="url(#origV3)"
+stroke-width="4.5"/>
 
-            <!-- Esfera média (original) -->
-            <circle cx="60" cy="60" r="24"
-              stroke="url(#origV2)"
-              stroke-width="2.2"
-              fill="none"
-              opacity="0.9"/>
+<circle cx="60" cy="60" r="9.5" fill="url(#origV3)"/>
+<circle cx="60" cy="60" r="24" stroke="url(#origV3)" stroke-width="2.2" fill="none"/>
+<circle cx="60" cy="60" r="36" stroke="url(#goldV3)" stroke-width="2.2" fill="none" opacity="0.65"/>
+</svg>
+</div>
 
-            <!-- Círculo maior (original) -->
-            <circle cx="60" cy="60" r="36"
-              stroke="url(#origV2)"
-              stroke-width="1.9"
-              fill="none"
-              opacity="0.45"/>
-          </svg>
-        </div>
-        <div class="hint">Centro ouro = “núcleo premium / assinatura”. Restante continua tech.</div>
-      </div>
+</div>
+</div>
 
-      <!-- =========================
-           VARIAÇÃO 3
-           Losango + centro + esfera média: original
-           Círculo maior: ouro
-           ========================= -->
-      <div class="card">
-        <div class="label">V3 — Interno original + anel externo ouro</div>
-        <div class="logoBox">
-          <svg width="140" height="140" viewBox="0 0 120 120" aria-label="Logo V3">
-            <defs>
-              <linearGradient id="origV3" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
+<script>
+const slider = document.getElementById("diamondSlider");
+const sizeValue = document.getElementById("sizeValue");
 
-              <linearGradient id="goldV3" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-            </defs>
+function updateDiamond(radius){
+const center = 60;
+const top = `${center},${center - radius}`;
+const right = `${center + radius},${center}`;
+const bottom = `${center},${center + radius}`;
+const left = `${center - radius},${center}`;
+const points = `${top} ${right} ${bottom} ${left}`;
 
-            <!-- Losango (AGORA CONTROLADO POR VARIÁVEL, SEM MUDAR DESIGN) -->
-            <polygon id="diamondV3"
-              points="60,4 116,60 60,116 4,60"
-              fill="none"
-              stroke="url(#origV3)"
-              stroke-width="4.5"
-              opacity="0.95"/>
+document.getElementById("diamondV1").setAttribute("points", points);
+document.getElementById("diamondV2").setAttribute("points", points);
+document.getElementById("diamondV3").setAttribute("points", points);
+}
 
-            <!-- Núcleo (original) -->
-            <circle cx="60" cy="60" r="9.5" fill="url(#origV3)"/>
+slider.addEventListener("input", function(){
+sizeValue.innerText = this.value;
+updateDiamond(parseInt(this.value));
+});
 
-            <!-- Esfera média (original) -->
-            <circle cx="60" cy="60" r="24"
-              stroke="url(#origV3)"
-              stroke-width="2.2"
-              fill="none"
-              opacity="0.9"/>
+updateDiamond(parseInt(slider.value));
+</script>
 
-            <!-- Círculo maior (OURO) -->
-            <circle cx="60" cy="60" r="36"
-              stroke="url(#goldV3)"
-              stroke-width="2.2"
-              fill="none"
-              opacity="0.65"/>
-          </svg>
-        </div>
-        <div class="hint">Anel externo ouro = “aura premium” sem poluir o núcleo tech.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-    // Lê as variáveis do :root
-    const styles = getComputedStyle(document.documentElement);
-    const center = parseFloat(styles.getPropertyValue('--diamondCenter')) || 60;
-    const radius = parseFloat(styles.getPropertyValue('--diamondRadius')) || 56;
-
-    function setDiamondPoints(elId, c, r){
-      const top    = `${c},${c - r}`;
-      const right  = `${c + r},${c}`;
-      const bottom = `${c},${c + r}`;
-      const left   = `${c - r},${c}`;
-      const points = `${top} ${right} ${bottom} ${left}`;
-
-      const el = document.getElementById(elId);
-      if(el) el.setAttribute('points', points);
-    }
-
-    // Aplica nas 3 variações
-    setDiamondPoints('diamondV1', center, radius);
-    setDiamondPoints('diamondV2', center, radius);
-    setDiamondPoints('diamondV3', center, radius);
-  </script>
 </body>
 </html>
