@@ -1,101 +1,163 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sansaflow — V2.2 Original</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tese do Logo — Sansaflow</title>
 
 <style>
-  :root{
-    --bg1:#0b1220;
-    --bg2:#1b1550;
-    --bg3:#0b1220;
-  }
-  body{
-    margin:0;
-    font-family: Inter, Arial, sans-serif;
-    color:#fff;
-    background: linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
-    background-size:400% 400%;
-    animation:bgMove 14s ease infinite;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:100vh;
-    padding:40px 16px;
-  }
-  @keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
-  .card{
-    width:min(520px, 100%);
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 24px;
-    padding: 34px 22px 26px;
-    backdrop-filter: blur(14px);
-    box-shadow: 0 18px 60px rgba(0,0,0,.55);
-    text-align:center;
-  }
-  h1{
-    margin:0 0 10px;
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:.4px;
-  }
-  p{
-    margin:0 0 22px;
-    opacity:.78;
-    font-size:13px;
-  }
-  svg{
-    filter: drop-shadow(0 0 18px rgba(109,40,217,.55));
-  }
+:root{
+  --bg1:#0b1220;
+  --bg2:#1b1550;
+  --gold:#FFB800;
+  --text:#e5e7eb;
+}
+
+body{
+  margin:0;
+  font-family: Inter, Arial, sans-serif;
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+h1{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+h2{
+  margin-top:60px;
+  font-size:24px;
+  color:#fff;
+}
+
+p{
+  line-height:1.7;
+  opacity:.9;
+}
+
+.logoBox{
+  margin:60px 0;
+  display:flex;
+  justify-content:center;
+}
+
+.card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:40px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+}
+
+.highlight{
+  color:var(--gold);
+  font-weight:600;
+}
 </style>
 </head>
 
 <body>
-  <div class="card">
-    <h1>V2.2 — Centro Original</h1>
-    <p>Voltando ao núcleo original (degradê tech).</p>
+<div class="container">
 
-    <svg width="180" height="180" viewBox="0 0 120 120" aria-label="Logo V2.2 Original">
-      <defs>
-        <!-- Degradê ORIGINAL -->
-        <linearGradient id="orig" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#7c3aed"/>
-          <stop offset="55%" stop-color="#2563eb"/>
-          <stop offset="100%" stop-color="#22d3ee"/>
-        </linearGradient>
-      </defs>
+<h1>Tese Oficial do Logo — Sansaflow</h1>
+<p>Versão escolhida: <strong>V2.2 — Centro Ouro com Luz por Trás</strong></p>
 
-      <!-- Losango -->
-      <polygon points="60,4 116,60 60,116 4,60"
-        fill="none"
-        stroke="url(#orig)"
-        stroke-width="4.5"
-        opacity="0.95"/>
+<div class="logoBox">
+<svg width="180" height="180" viewBox="0 0 120 120">
 
-      <!-- Núcleo ORIGINAL -->
-      <circle cx="60" cy="60" r="10"
-        fill="url(#orig)"/>
+<defs>
+  <linearGradient id="orig" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#7c3aed"/>
+    <stop offset="55%" stop-color="#2563eb"/>
+    <stop offset="100%" stop-color="#22d3ee"/>
+  </linearGradient>
+</defs>
 
-      <!-- Esfera média -->
-      <circle cx="60" cy="60" r="24"
-        stroke="url(#orig)"
-        stroke-width="2.2"
-        fill="none"
-        opacity="0.9"/>
+<!-- Luz por trás -->
+<circle cx="60" cy="60" r="44"
+  fill="none"
+  stroke="rgba(255,184,0,0.15)"
+  stroke-width="18"/>
 
-      <!-- Círculo maior -->
-      <circle cx="60" cy="60" r="36"
-        stroke="url(#orig)"
-        stroke-width="1.9"
-        fill="none"
-        opacity="0.45"/>
-    </svg>
-  </div>
+<!-- Losango -->
+<polygon points="60,4 116,60 60,116 4,60"
+  fill="none"
+  stroke="url(#orig)"
+  stroke-width="4.5"/>
+
+<!-- Núcleo Ouro -->
+<circle cx="60" cy="60" r="10"
+  fill="#FFB800"/>
+
+<!-- Esfera média -->
+<circle cx="60" cy="60" r="24"
+  stroke="url(#orig)"
+  stroke-width="2.2"
+  fill="none"/>
+
+<!-- Anel externo -->
+<circle cx="60" cy="60" r="36"
+  stroke="url(#orig)"
+  stroke-width="1.9"
+  fill="none"
+  opacity="0.45"/>
+
+</svg>
+</div>
+
+<div class="card">
+
+<h2>1. Estrutura Geométrica</h2>
+<p>
+O losango representa <span class="highlight">estrutura, estratégia e controle</span>.  
+É uma forma estável, porém dinâmica, associada a precisão e direção.
+</p>
+
+<h2>2. Núcleo Ouro</h2>
+<p>
+O núcleo dourado simboliza <span class="highlight">valor, liderança e decisão estratégica</span>.  
+Neurocientificamente, o ouro ativa percepção de autoridade, escassez e alto valor.
+</p>
+
+<h2>3. Anéis Tecnológicos</h2>
+<p>
+Os anéis em degradê azul-roxo comunicam <span class="highlight">tecnologia, inteligência e inovação</span>.  
+Cores frias aumentam percepção de confiança e segurança.
+</p>
+
+<h2>4. Luz por Trás</h2>
+<p>
+A aura suave atrás do símbolo reforça a ideia de <span class="highlight">energia controlada</span> e
+presença dominante sem agressividade visual.
+</p>
+
+<h2>5. Posicionamento Transmitido</h2>
+<p>
+O logo comunica:
+</p>
+<ul>
+<li>Controle tecnológico premium</li>
+<li>Autoridade estratégica</li>
+<li>Inteligência aplicada</li>
+<li>Sistema robusto e confiável</li>
+</ul>
+
+<h2>6. Arquitetura de Marca</h2>
+<p>
+A marca Sansaflow se posiciona como:
+<br><br>
+<strong>“Tecnologia sob comando. Inteligência com direção.”</strong>
+</p>
+
+</div>
+
+</div>
 </body>
 </html>
