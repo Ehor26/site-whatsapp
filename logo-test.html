@@ -1,743 +1,620 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sansaflow - 9 Logos (luz com controle)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sansaflow | Automação Inteligente via WhatsApp</title>
+  <meta name="description" content="Sansaflow — Automação e atendimento inteligente via WhatsApp Business para empresas que querem crescer com tecnologia e performance." />
+  <meta name="theme-color" content="#0B0F19" />
 
-<style>
-  :root{
-    --bg1:#0b1220;
-    --bg2:#1b1550;
-    --bg3:#0b1220;
+  <!-- Font: Inter (corporativo premium) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    /* CONTROLES (atualizados via sliders no JS) */
-    --shineOpacity: .85;    /* força geral da luz */
-    --shinePeak: .95;       /* pico (centro do feixe) */
-    --shineWide: 52%;       /* largura do feixe (maior = mais largo) */
-  }
+  <style>
+    :root{
+      --bg: #0B0F19;          /* preto profundo */
+      --panel: #111827;       /* grafite */
+      --text: #F9FAFB;        /* branco */
+      --muted: rgba(249,250,251,.72);
+      --line: rgba(255,255,255,.10);
 
-  body{
-    margin:0;
-    font-family: Inter, Arial, sans-serif;
-    color:#fff;
-    background: linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
-    background-size:400% 400%;
-    animation:bgMove 14s ease infinite;
-  }
+      --primary: #2563EB;     /* azul premium CTA */
+      --secondary: #6D28D9;   /* roxo IA */
+      --gold: #C6A75E;        /* detalhe luxo */
 
-  @keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
+      --radius: 16px;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --max: 1100px;
+    }
 
-  .wrap{
-    max-width:1180px;
-    margin:0 auto;
-    padding:70px 18px 90px;
-  }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 15% 10%, rgba(109,40,217,.14), transparent 55%),
+                  radial-gradient(1200px 600px at 85% 15%, rgba(37,99,235,.16), transparent 55%),
+                  radial-gradient(800px 500px at 50% 100%, rgba(198,167,94,.08), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-  .title{
-    text-align:center;
-    font-weight:900;
-    letter-spacing:.4px;
-    margin:0 0 10px;
-  }
-  .subtitle{
-    text-align:center;
-    opacity:.78;
-    margin:0 0 22px;
-  }
+    a{ color: inherit; text-decoration: none; }
 
-  .controls{
-    display:grid;
-    gap:12px;
-    margin:0 auto 34px;
-    max-width:920px;
-  }
+    /* Subtle animated noise + grid */
+    .fx{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,.06), transparent 18%),
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.16), transparent 60%),
+        radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.14), transparent 60%),
+        radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,.12), transparent 60%);
+      opacity: .55;
+      mix-blend-mode: screen;
+      animation: floatFx 10s ease-in-out infinite;
+    }
 
-  .controlBox{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.14);
-    border-radius:18px;
-    padding:14px 16px 12px;
-    backdrop-filter: blur(14px);
-  }
+    .grid{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: .08;
+      mask-image: radial-gradient(600px 400px at 50% 10%, black 35%, transparent 70%);
+    }
 
-  .controlRow{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:16px;
-    flex-wrap:wrap;
-  }
+    @keyframes floatFx{
+      0%,100%{ transform: translateY(0px); }
+      50%{ transform: translateY(10px); }
+    }
 
-  .controlLabel{
-    font-weight:900;
-    letter-spacing:.2px;
-    opacity:.92;
-    white-space:nowrap;
-  }
+    /* Layout */
+    .wrap{
+      position: relative;
+      z-index: 1;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 22px 18px 44px;
+    }
 
-  input[type=range]{
-    width:360px;
-    max-width:86vw;
-  }
+    /* Topbar */
+    .topbar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17,24,39,.55);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
 
-  .cols{
-    display:grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap:18px;
-  }
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: .2px;
+      font-weight: 700;
+    }
 
-  .col{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-  }
+    .logo{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
+        linear-gradient(135deg, rgba(37,99,235,.95), rgba(109,40,217,.95));
+      box-shadow: 0 12px 30px rgba(37,99,235,.20);
+      position: relative;
+      overflow: hidden;
+    }
+    .logo::after{
+      content:"";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.22), transparent 60%);
+      transform: rotate(15deg);
+      animation: shine 3.6s ease-in-out infinite;
+    }
+    @keyframes shine{
+      0%{ transform: translateX(-30%) rotate(15deg); opacity: .0; }
+      35%{ opacity: .85; }
+      60%{ opacity: .0; }
+      100%{ transform: translateX(35%) rotate(15deg); opacity: .0; }
+    }
 
-  .card{
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 22px;
-    padding: 22px 16px 18px;
-    backdrop-filter: blur(14px);
-    transition: .35s ease;
-    position:relative;
-    overflow:hidden;
-    text-align:center;
-  }
+    .nav{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 9px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: all .18s ease;
+    }
+    .nav a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+    }
 
-  .card:before{
-    content:"";
-    position:absolute;
-    inset:-90px;
-    background:
-      radial-gradient(circle at 25% 25%, rgba(255,215,0,.07), transparent 55%),
-      radial-gradient(circle at 70% 75%, rgba(109,40,217,.12), transparent 55%);
-    filter: blur(10px);
-    pointer-events:none;
-  }
+    /* Hero */
+    .hero{
+      margin-top: 18px;
+      padding: 44px 18px 26px;
+      border-radius: calc(var(--radius) + 8px);
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(17,24,39,.62), rgba(17,24,39,.38));
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
 
-  .card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 18px 60px rgba(0,0,0,.55);
-    border-color: rgba(255,255,255,0.18);
-  }
+    .hero::before{
+      content:"";
+      position: absolute;
+      inset: -60%;
+      background:
+        radial-gradient(closest-side, rgba(37,99,235,.20), transparent 62%),
+        radial-gradient(closest-side, rgba(109,40,217,.20), transparent 62%),
+        radial-gradient(closest-side, rgba(198,167,94,.10), transparent 62%);
+      transform: translate(30%, -10%);
+      filter: blur(14px);
+      opacity: .8;
+      animation: orbit 10s ease-in-out infinite;
+    }
 
-  .label{
-    font-weight:900;
-    letter-spacing:.2px;
-    margin: 0 0 12px;
-    opacity:.95;
-  }
+    @keyframes orbit{
+      0%,100%{ transform: translate(30%,-10%) scale(1); }
+      50%{ transform: translate(20%,-15%) scale(1.04); }
+    }
 
-  .logoBox{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding: 10px 0 4px;
-  }
+    .heroInner{
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-  svg{
-    filter: drop-shadow(0 0 18px rgba(109,40,217,.55));
-  }
+    .kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(249,250,251,.78);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+    }
 
-  /* ====== LUZ CONTROLÁVEL (classe única) ====== */
-  .shineWrap{
-    mix-blend-mode: screen;
-    opacity: var(--shineOpacity);
-  }
+    .kicker .dot{
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(198,167,94,.10);
+    }
 
-  /* responsivo */
-  @media (max-width: 980px){
-    .cols{ grid-template-columns: 1fr; }
-  }
-</style>
+    h1{
+      margin: 18px 0 0;
+      font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+
+    .grad{
+      background: linear-gradient(90deg, var(--text), rgba(249,250,251,.80), rgba(249,250,251,.90));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle{
+      margin: 16px auto 0;
+      max-width: 720px;
+      color: rgba(249,250,251,.75);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .ctaRow{
+      margin-top: 22px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      user-select: none;
+    }
+
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
+
+    .btnPrimary{
+      border: 1px solid rgba(37,99,235,.55);
+      background: linear-gradient(180deg, rgba(37,99,235,.95), rgba(37,99,235,.72));
+      box-shadow: 0 16px 40px rgba(37,99,235,.20);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btnPrimary::after{
+      content:"";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(120deg, transparent 38%, rgba(255,255,255,.24), transparent 62%);
+      transform: translateX(-30%) rotate(12deg);
+      opacity: 0;
+      transition: opacity .18s ease;
+    }
+
+    .btnPrimary:hover{
+      box-shadow: 0 22px 60px rgba(37,99,235,.26);
+    }
+    .btnPrimary:hover::after{
+      opacity: 1;
+      animation: sweep 1.2s ease-out forwards;
+    }
+
+    @keyframes sweep{
+      0%{ transform: translateX(-30%) rotate(12deg); }
+      100%{ transform: translateX(30%) rotate(12deg); }
+    }
+
+    .pillRow{
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      color: rgba(249,250,251,.70);
+      font-size: 13px;
+    }
+
+    .pill{
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Sections */
+    .section{
+      margin-top: 18px;
+      padding: 22px 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: calc(var(--radius) + 6px);
+      background: rgba(17,24,39,.38);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .section h2{
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .twoCol{
+      display: grid;
+      grid-template-columns: 1.35fr .85fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px){
+      .twoCol{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      background: rgba(0,0,0,.18);
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before{
+      content:"";
+      position: absolute;
+      inset: -60%;
+      background: radial-gradient(closest-side, rgba(109,40,217,.18), transparent 60%);
+      transform: translate(40%, -20%);
+      filter: blur(10px);
+      opacity: .8;
+      pointer-events: none;
+    }
+
+    .card p{
+      margin: 0;
+      color: rgba(249,250,251,.74);
+      line-height: 1.7;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .list{
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .item{
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+
+    .badge{
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(37,99,235,.35), rgba(109,40,217,.35));
+      border: 1px solid rgba(255,255,255,.10);
+      flex: 0 0 auto;
+    }
+
+    .item strong{
+      display:block;
+      font-size: 13px;
+      margin-bottom: 3px;
+      letter-spacing: -0.01em;
+    }
+    .item span{
+      display:block;
+      font-size: 13px;
+      color: rgba(249,250,251,.70);
+      line-height: 1.5;
+    }
+
+    /* Contact */
+    .contactGrid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 700px){
+      .contactGrid{ grid-template-columns: 1fr; }
+    }
+
+    .contactBox{
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      background: rgba(255,255,255,.03);
+      padding: 14px;
+    }
+
+    .contactBox div{
+      font-size: 13px;
+      color: rgba(249,250,251,.75);
+      line-height: 1.7;
+    }
+    .contactBox b{
+      color: rgba(249,250,251,.92);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      padding: 16px 10px;
+      text-align: center;
+      color: rgba(249,250,251,.60);
+      font-size: 12px;
+    }
+    footer a{
+      color: rgba(249,250,251,.72);
+      border-bottom: 1px dotted rgba(255,255,255,.22);
+    }
+    footer a:hover{
+      color: var(--text);
+      border-bottom-color: rgba(255,255,255,.40);
+    }
+
+    /* Scroll reveal (light animations) */
+    .reveal{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .7s ease, transform .7s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0px);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .fx, .grid, .logo::after, .hero::before, .btnPrimary::after { animation: none !important; }
+      .reveal{ opacity: 1; transform: none; transition: none; }
+      .btn{ transition: none; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
-  <h1 class="title">Sansaflow — 9 Logos (Luz)</h1>
-  <p class="subtitle">Tamanho do losango + intensidade da luz (slider). Não altera logos nem cores.</p>
+  <div class="fx"></div>
+  <div class="grid"></div>
 
-  <div class="controls">
+  <div class="wrap">
+    <div class="topbar reveal">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>Sansaflow</div>
+      </div>
 
-    <div class="controlBox">
-      <div class="controlRow">
-        <div class="controlLabel">Tamanho do Losango: <span id="sizeValue">60</span></div>
-        <input type="range" min="40" max="70" value="60" id="diamondSlider">
+      <div class="nav">
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+        <a href="/privacidade">Privacidade</a>
+        <a href="/termos.html">Termos</a>
       </div>
     </div>
 
-    <div class="controlBox">
-      <div class="controlRow">
-        <div class="controlLabel">Intensidade da Luz: <span id="shineValue">85%</span></div>
-        <input type="range" min="10" max="140" value="85" id="shineSlider">
-      </div>
-    </div>
+    <section class="hero reveal" id="inicio">
+      <div class="heroInner">
+        <div class="kicker">
+          <span class="dot"></span>
+          Tecnologia • Automação • Performance
+        </div>
 
-    <div class="controlBox">
-      <div class="controlRow">
-        <div class="controlLabel">Largura da Luz: <span id="wideValue">52%</span></div>
-        <input type="range" min="30" max="80" value="52" id="wideSlider">
-      </div>
-    </div>
+        <h1><span class="grad">Automação inteligente</span> via WhatsApp para empresas que querem crescer.</h1>
 
+        <p class="subtitle">
+          A Sansaflow acelera atendimento, organização e produtividade com automações e fluxos inteligentes no WhatsApp Business —
+          com foco em eficiência, segurança e experiência do cliente.
+        </p>
+
+        <div class="ctaRow">
+          <!-- Ajuste o link para seu WhatsApp real depois -->
+          <a class="btn btnPrimary" href="https://wa.me/5511999999999?text=Olá!%20Quero%20conhecer%20a%20Sansaflow." target="_blank" rel="noopener">
+            Falar com especialista
+            <span aria-hidden="true">→</span>
+          </a>
+          <a class="btn" href="#contato">
+            Ver contato
+          </a>
+        </div>
+
+        <div class="pillRow">
+          <div class="pill">Resposta mais rápida</div>
+          <div class="pill">Operação mais organizada</div>
+          <div class="pill">Experiência premium</div>
+          <div class="pill">Base para escalar</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="sobre">
+      <div class="twoCol">
+        <div class="card">
+          <h2>Sobre a Sansaflow</h2>
+          <p>
+            A Sansaflow é uma empresa especializada em soluções digitais, automação e atendimento inteligente via WhatsApp Business,
+            oferecendo comunicação eficiente e suporte profissional para empresas.
+            <br><br>
+            Este site é uma página institucional com informações de contato, políticas e termos.
+          </p>
+        </div>
+
+        <div>
+          <h2>Por que isso funciona</h2>
+          <div class="list">
+            <div class="item">
+              <div class="badge">⚡</div>
+              <div>
+                <strong>Clareza e rapidez</strong>
+                <span>Menos fricção para o cliente = mais conversão e mais confiança.</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="badge">🧠</div>
+              <div>
+                <strong>Experiência focada</strong>
+                <span>Interface limpa: o cérebro entende rápido, decide rápido e compra mais.</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="badge">🛡️</div>
+              <div>
+                <strong>Base de compliance</strong>
+                <span>Privacidade e termos publicados: mais credibilidade para plataformas e clientes.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="contato">
+      <h2>Contato</h2>
+
+      <div class="contactGrid">
+        <div class="contactBox">
+          <div><b>Email:</b> contato@sansaflow.com</div>
+          <div><b>WhatsApp:</b> (15) 99705-7763</div>
+        </div>
+
+        <div class="contactBox">
+          <div><b>Localidade:</b> São Paulo/SP</div>
+          <div><b>Atendimento:</b> Comercial e suporte</div>
+        </div>
+      </div>
+
+      <div class="ctaRow" style="margin-top:14px;">
+        <a class="btn btnPrimary" href="https://wa.me/5511999999999?text=Olá!%20Quero%20um%20atendimento%20com%20a%20Sansaflow." target="_blank" rel="noopener">
+          Atendimento via WhatsApp
+          <span aria-hidden="true">→</span>
+        </a>
+        <a class="btn" href="/privacidade">Ver Política de Privacidade</a>
+        <a class="btn" href="/termos.html">Ver Termos de Uso</a>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      © <span id="year"></span> Sansaflow — Todos os direitos reservados.
+      <br>
+      <a href="/privacidade">Política de Privacidade</a> • <a href="/termos.html">Termos de Uso</a>
+    </footer>
   </div>
 
-  <div class="cols">
-
-    <!-- ===================== COLUNA V1 ===================== -->
-    <div class="col">
-
-      <!-- V1.1: luz por cima -->
-      <div class="card">
-        <div class="label">V1.1 — Losango ouro (luz por cima)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V1.1">
-            <defs>
-              <linearGradient id="origV1_11" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV1_11" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <!-- Luz (parametrizada por CSS vars) -->
-              <linearGradient id="shineGradV1_11" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="55%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="65%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV1_11">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV1_11)">
-              <polygon class="diamond" id="diamondV1_11"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#goldV1_11)" stroke-width="4.5" opacity="0.95"/>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#origV1_11)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV1_11)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#origV1_11)" stroke-width="1.9" fill="none" opacity="0.45"/>
-
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV1_11)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <!-- V1.2: luz por trás -->
-      <div class="card">
-        <div class="label">V1.2 — Losango ouro (luz por trás)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V1.2">
-            <defs>
-              <linearGradient id="origV1_12" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV1_12" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <linearGradient id="shineGradV1_12" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV1_12">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV1_12)">
-
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV1_12)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-
-              <polygon class="diamond" id="diamondV1_12"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#goldV1_12)" stroke-width="4.5" opacity="0.95"/>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#origV1_12)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV1_12)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#origV1_12)" stroke-width="1.9" fill="none" opacity="0.45"/>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <!-- V1.3: luz por dentro -->
-      <div class="card">
-        <div class="label">V1.3 — Losango ouro (luz por dentro)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V1.3">
-            <defs>
-              <linearGradient id="origV1_13" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV1_13" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <linearGradient id="shineGradV1_13" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV1_13">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV1_13)">
-              <polygon class="diamond" id="diamondV1_13"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#goldV1_13)" stroke-width="4.5" opacity="0.95"/>
-
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV1_13)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#origV1_13)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV1_13)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#origV1_13)" stroke-width="1.9" fill="none" opacity="0.45"/>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ===================== COLUNA V2 ===================== -->
-    <div class="col">
-
-      <div class="card">
-        <div class="label">V2.1 — Centro ouro (luz por cima)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V2.1">
-            <defs>
-              <linearGradient id="origV2_21" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV2_21" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <linearGradient id="shineGradV2_21" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="55%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="65%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV2_21">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV2_21)">
-              <polygon class="diamond" id="diamondV2_21"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#origV2_21)" stroke-width="4.5" opacity="0.95"/>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#goldV2_21)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV2_21)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#origV2_21)" stroke-width="1.9" fill="none" opacity="0.45"/>
-
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV2_21)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="label">V2.2 — Centro ouro (luz por trás)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V2.2">
-            <defs>
-              <linearGradient id="origV2_22" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV2_22" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <linearGradient id="shineGradV2_22" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV2_22">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV2_22)">
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV2_22)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-
-              <polygon class="diamond" id="diamondV2_22"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#origV2_22)" stroke-width="4.5" opacity="0.95"/>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#goldV2_22)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV2_22)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#origV2_22)" stroke-width="1.9" fill="none" opacity="0.45"/>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="label">V2.3 — Centro ouro (luz por dentro)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V2.3">
-            <defs>
-              <linearGradient id="origV2_23" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV2_23" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <linearGradient id="shineGradV2_23" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV2_23">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV2_23)">
-              <polygon class="diamond" id="diamondV2_23"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#origV2_23)" stroke-width="4.5" opacity="0.95"/>
-
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV2_23)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#goldV2_23)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV2_23)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#origV2_23)" stroke-width="1.9" fill="none" opacity="0.45"/>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ===================== COLUNA V3 ===================== -->
-    <div class="col">
-
-      <div class="card">
-        <div class="label">V3.1 — Anel externo ouro (luz por cima)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V3.1">
-            <defs>
-              <linearGradient id="origV3_31" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV3_31" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <linearGradient id="shineGradV3_31" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="55%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="65%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV3_31">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV3_31)">
-              <polygon class="diamond" id="diamondV3_31"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#origV3_31)" stroke-width="4.5" opacity="0.95"/>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#origV3_31)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV3_31)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#goldV3_31)" stroke-width="2.2" fill="none" opacity="0.65"/>
-
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV3_31)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="label">V3.2 — Anel externo ouro (luz por trás)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V3.2">
-            <defs>
-              <linearGradient id="origV3_32" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV3_32" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <linearGradient id="shineGradV3_32" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV3_32">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV3_32)">
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV3_32)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-
-              <polygon class="diamond" id="diamondV3_32"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#origV3_32)" stroke-width="4.5" opacity="0.95"/>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#origV3_32)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV3_32)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#goldV3_32)" stroke-width="2.2" fill="none" opacity="0.65"/>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="label">V3.3 — Anel externo ouro (luz por dentro)</div>
-        <div class="logoBox">
-          <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V3.3">
-            <defs>
-              <linearGradient id="origV3_33" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="55%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-
-              <linearGradient id="goldV3_33" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFD700"/>
-                <stop offset="50%" stop-color="#FFB800"/>
-                <stop offset="100%" stop-color="#F59E0B"/>
-              </linearGradient>
-
-              <linearGradient id="shineGradV3_33" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-
-              <clipPath id="clipAllV3_33">
-                <rect x="-10" y="-10" width="140" height="140" rx="18" ry="18"></rect>
-              </clipPath>
-            </defs>
-
-            <g clip-path="url(#clipAllV3_33)">
-              <polygon class="diamond" id="diamondV3_33"
-                points="60,0 120,60 60,120 0,60"
-                fill="none" stroke="url(#origV3_33)" stroke-width="4.5" opacity="0.95"/>
-
-              <g class="shineWrap">
-                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
-                      fill="url(#shineGradV3_33)" transform="rotate(25 60 60)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-
-              <circle cx="60" cy="60" r="9.5" fill="url(#origV3_33)"/>
-              <circle cx="60" cy="60" r="24" stroke="url(#origV3_33)" stroke-width="2.2" fill="none" opacity="0.9"/>
-              <circle cx="60" cy="60" r="36" stroke="url(#goldV3_33)" stroke-width="2.2" fill="none" opacity="0.65"/>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-
-<script>
-  const slider = document.getElementById("diamondSlider");
-  const sizeValue = document.getElementById("sizeValue");
-
-  const shineSlider = document.getElementById("shineSlider");
-  const shineValue = document.getElementById("shineValue");
-
-  const wideSlider = document.getElementById("wideSlider");
-  const wideValue = document.getElementById("wideValue");
-
-  function updateDiamond(radius){
-    const c = 60;
-    const top    = `${c},${c - radius}`;
-    const right  = `${c + radius},${c}`;
-    const bottom = `${c},${c + radius}`;
-    const left   = `${c - radius},${c}`;
-    const points = `${top} ${right} ${bottom} ${left}`;
-
-    document.querySelectorAll(".diamond").forEach(el => el.setAttribute("points", points));
-  }
-
-  function updateShineIntensity(percent){
-    // 10..140 (%). Converte para opacidade e pico.
-    const o = Math.max(0.10, Math.min(1.40, percent / 100));
-    const baseOpacity = Math.min(1.0, 0.25 + o * 0.65);     // 0.315..1.0
-    const peak = Math.min(1.0, 0.40 + o * 0.55);            // 0.455..1.0
-    document.documentElement.style.setProperty("--shineOpacity", baseOpacity.toFixed(2));
-    document.documentElement.style.setProperty("--shinePeak", peak.toFixed(2));
-
-    // Atualiza o stop central de TODOS os gradientes (já existe como rgba(255,255,255,0.95) no HTML)
-    document.querySelectorAll(".shineMidStop").forEach(stop => {
-      stop.setAttribute("stop-color", `rgba(255,255,255,${peak.toFixed(2)})`);
-    });
-  }
-
-  function updateShineWidth(wide){
-    // wide em % (30..80) -> ajusta a “zona” de brilho
-    // implementado movendo as posições 45/55/65 para ficar mais largo/estreito (só nos gradientes com 5 stops)
-    wideValue.innerText = `${wide}%`;
-    const w = Math.max(30, Math.min(80, wide));
-
-    // Mapeia: w=30 => faixa estreita (49/51/53), w=80 => faixa larga (40/60/80)
-    const left = Math.round(55 - (w - 30) * (15 / 50));   // 55 -> 40
-    const mid  = 55;
-    const right= Math.round(55 + (w - 30) * (25 / 50));   // 55 -> 80
-    const left2= Math.max(0, left - 10);
-
-    // Para cada gradient de "5 stops" (tem offsets 0,45,55,65,100)
-    document.querySelectorAll('linearGradient[id^="shineGrad"]').forEach(g => {
-      const stops = g.querySelectorAll("stop");
-      if (stops.length === 5) {
-        stops[1].setAttribute("offset", `${left2}%`);
-        stops[2].setAttribute("offset", `${left}%`);
-        stops[3].setAttribute("offset", `${right}%`);
-      } else if (stops.length === 3) {
-        // para o de 3 stops: 0 / 50 / 100 -> mantém, porque já funciona bem
-      }
-    });
-  }
-
-  slider.addEventListener("input", function(){
-    sizeValue.innerText = this.value;
-    updateDiamond(parseInt(this.value, 10));
-  });
-
-  shineSlider.addEventListener("input", function(){
-    shineValue.innerText = `${this.value}%`;
-    updateShineIntensity(parseInt(this.value, 10));
-  });
-
-  wideSlider.addEventListener("input", function(){
-    updateShineWidth(parseInt(this.value, 10));
-  });
-
-  // init
-  updateDiamond(parseInt(slider.value, 10));
-  shineValue.innerText = `${shineSlider.value}%`;
-  updateShineIntensity(parseInt(shineSlider.value, 10));
-  updateShineWidth(parseInt(wideSlider.value, 10));
-</script>
+  <script>
+    // Ano automático
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll reveal leve (sem biblioteca)
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("show");
+      });
+    }, { threshold: 0.12 });
+
+    els.forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
