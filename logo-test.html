@@ -1,163 +1,416 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tese do Logo — Sansaflow</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sansaflow — Tese do Logo (V2.2)</title>
 
 <style>
-:root{
-  --bg1:#0b1220;
-  --bg2:#1b1550;
-  --gold:#FFB800;
-  --text:#e5e7eb;
-}
+  :root{
+    --bg1:#070A14;
+    --bg2:#0B1030;
+    --bg3:#120A2E;
+    --card: rgba(255,255,255,.05);
+    --stroke: rgba(255,255,255,.10);
+    --text:#EAF0FF;
+    --muted: rgba(234,240,255,.75);
+    --gold:#FFB800;
 
-body{
-  margin:0;
-  font-family: Inter, Arial, sans-serif;
-  background: linear-gradient(135deg,var(--bg1),var(--bg2));
-  color:var(--text);
-}
+    --brand1:#7c3aed;
+    --brand2:#2563eb;
+    --brand3:#22d3ee;
 
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:80px 20px;
-}
+    --radius: 22px;
+  }
 
-h1{
-  font-size:42px;
-  margin-bottom:10px;
-}
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(900px 600px at 20% 10%, rgba(124,58,237,.25), transparent 60%),
+      radial-gradient(900px 600px at 80% 30%, rgba(34,211,238,.18), transparent 60%),
+      radial-gradient(900px 600px at 55% 85%, rgba(255,184,0,.12), transparent 65%),
+      linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    min-height:100vh;
+  }
 
-h2{
-  margin-top:60px;
-  font-size:24px;
-  color:#fff;
-}
+  .wrap{
+    max-width: 1120px;
+    margin:0 auto;
+    padding: 72px 18px 90px;
+  }
 
-p{
-  line-height:1.7;
-  opacity:.9;
-}
+  .topline{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+    opacity:.9;
+    font-weight:600;
+    letter-spacing:.2px;
+  }
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:999px;
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.10);
+    backdrop-filter: blur(10px);
+    font-size:12px;
+  }
+  .dot{
+    width:8px; height:8px; border-radius:99px;
+    background: linear-gradient(135deg,var(--brand1),var(--brand2),var(--brand3));
+    box-shadow: 0 0 18px rgba(109,40,217,.55);
+  }
 
-.logoBox{
-  margin:60px 0;
-  display:flex;
-  justify-content:center;
-}
+  h1{
+    margin:0 0 12px;
+    font-size: 44px;
+    line-height:1.05;
+    letter-spacing:-.7px;
+  }
+  .subtitle{
+    margin:0 0 34px;
+    color: var(--muted);
+    max-width: 860px;
+    line-height:1.6;
+    font-size: 16px;
+  }
 
-.card{
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  padding:40px;
-  border-radius:20px;
-  backdrop-filter:blur(10px);
-}
+  .hero{
+    display:grid;
+    grid-template-columns: 420px 1fr;
+    gap:18px;
+    align-items:stretch;
+  }
 
-.highlight{
-  color:var(--gold);
-  font-weight:600;
-}
+  .card{
+    position:relative;
+    background: var(--card);
+    border:1px solid var(--stroke);
+    border-radius: var(--radius);
+    padding: 22px;
+    backdrop-filter: blur(14px);
+    overflow:hidden;
+  }
+  .card:before{
+    content:"";
+    position:absolute;
+    inset:-120px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,184,0,.12), transparent 55%),
+      radial-gradient(circle at 75% 30%, rgba(124,58,237,.20), transparent 55%),
+      radial-gradient(circle at 70% 80%, rgba(34,211,238,.12), transparent 55%);
+    filter: blur(18px);
+    pointer-events:none;
+    opacity:.65;
+  }
+  .card > *{ position:relative; }
+
+  .logoPane{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:14px;
+    min-height: 330px;
+  }
+  .logoHeader{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .logoTitle{
+    margin:0;
+    font-size:16px;
+    font-weight:800;
+    letter-spacing:.2px;
+  }
+  .logoMeta{
+    margin:2px 0 0;
+    font-size:12px;
+    color: var(--muted);
+    line-height:1.4;
+  }
+  .logoBox{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 10px 0 6px;
+  }
+  svg{
+    filter: drop-shadow(0 0 18px rgba(109,40,217,.55));
+  }
+
+  .kbd{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 12px;
+    color: rgba(234,240,255,.9);
+    padding: 6px 10px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    background: rgba(0,0,0,.18);
+    white-space: nowrap;
+  }
+
+  .grid2{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:14px;
+    margin-top:14px;
+  }
+
+  h2{
+    margin:0 0 10px;
+    font-size: 16px;
+    font-weight: 850;
+    letter-spacing:.2px;
+  }
+
+  .bullets{
+    margin:0;
+    padding-left: 18px;
+    color: var(--muted);
+    line-height:1.65;
+    font-size: 14px;
+  }
+  .bullets li{ margin: 6px 0; }
+
+  .kv{
+    display:grid;
+    grid-template-columns: 160px 1fr;
+    gap:10px 14px;
+    margin-top: 4px;
+    font-size: 14px;
+    line-height:1.55;
+  }
+  .k{
+    color: rgba(234,240,255,.78);
+    font-weight: 700;
+  }
+  .v{
+    color: rgba(234,240,255,.92);
+  }
+
+  .hr{
+    height:1px;
+    background: rgba(255,255,255,.10);
+    margin: 18px 0;
+  }
+
+  .tagline{
+    margin:0;
+    color: rgba(234,240,255,.90);
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .tagline span{
+    color: var(--gold);
+  }
+
+  .section{
+    margin-top: 18px;
+  }
+
+  .ruleGrid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:14px;
+    margin-top:14px;
+  }
+  .mini{
+    padding:16px;
+    border-radius: 18px;
+    border:1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.04);
+  }
+  .mini h3{
+    margin:0 0 8px;
+    font-size: 13px;
+    font-weight: 850;
+    letter-spacing:.2px;
+  }
+  .mini p{
+    margin:0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height:1.55;
+  }
+  .mini .ok{ color: rgba(34,211,238,.95); font-weight:800; }
+  .mini .no{ color: rgba(255,184,0,.95); font-weight:800; }
+
+  .footer{
+    margin-top:18px;
+    display:flex;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+    color: rgba(234,240,255,.65);
+    font-size: 12px;
+    line-height:1.5;
+  }
+
+  @media (max-width: 980px){
+    .hero{ grid-template-columns: 1fr; }
+    .grid2{ grid-template-columns: 1fr; }
+    .ruleGrid{ grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 
 <body>
-<div class="container">
+  <div class="wrap">
+    <div class="topline">
+      <div class="pill"><span class="dot"></span> Documento oficial interno</div>
+      <div class="pill">Logo escolhido: <strong>V2.2</strong></div>
+      <div class="pill">Nome: <strong>Sansaflow</strong></div>
+    </div>
 
-<h1>Tese Oficial do Logo — Sansaflow</h1>
-<p>Versão escolhida: <strong>V2.2 — Centro Ouro com Luz por Trás</strong></p>
+    <h1>Tese do Logo — Sansaflow</h1>
+    <p class="subtitle">
+      Este documento define o significado, o racional (percepção humana/neurociência) e as regras mínimas de uso do símbolo
+      <strong>V2.2 — Centro ouro (luz por trás)</strong> para garantir consistência e aparência premium em todas as aplicações.
+    </p>
 
-<div class="logoBox">
-<svg width="180" height="180" viewBox="0 0 120 120">
+    <div class="hero">
+      <!-- LOGO -->
+      <div class="card logoPane">
+        <div class="logoHeader">
+          <div>
+            <p class="logoTitle">Símbolo principal (V2.2)</p>
+            <p class="logoMeta">Losango original + núcleo ouro + luz por trás</p>
+          </div>
+          <div class="kbd">Versão: V2.2</div>
+        </div>
 
-<defs>
-  <linearGradient id="orig" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="#7c3aed"/>
-    <stop offset="55%" stop-color="#2563eb"/>
-    <stop offset="100%" stop-color="#22d3ee"/>
-  </linearGradient>
-</defs>
+        <div class="logoBox">
+          <!-- LOGO (NÃO ALTERADO: formas/cores base) -->
+          <svg width="190" height="190" viewBox="0 0 120 120" aria-label="Sansaflow Logo V2.2">
+            <defs>
+              <linearGradient id="origV2_2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7c3aed"/>
+                <stop offset="55%" stop-color="#2563eb"/>
+                <stop offset="100%" stop-color="#22d3ee"/>
+              </linearGradient>
+            </defs>
 
-<!-- Luz por trás -->
-<circle cx="60" cy="60" r="44"
-  fill="none"
-  stroke="rgba(255,184,0,0.15)"
-  stroke-width="18"/>
+            <!-- Luz por trás -->
+            <circle cx="60" cy="60" r="44"
+              fill="none"
+              stroke="rgba(255,184,0,0.15)"
+              stroke-width="18" />
 
-<!-- Losango -->
-<polygon points="60,4 116,60 60,116 4,60"
-  fill="none"
-  stroke="url(#orig)"
-  stroke-width="4.5"/>
+            <!-- Losango (original) -->
+            <polygon points="60,4 116,60 60,116 4,60"
+              fill="none"
+              stroke="url(#origV2_2)"
+              stroke-width="4.5"
+              opacity="0.95"/>
 
-<!-- Núcleo Ouro -->
-<circle cx="60" cy="60" r="10"
-  fill="#FFB800"/>
+            <!-- Núcleo ouro (original) -->
+            <circle cx="60" cy="60" r="10" fill="#FFB800"/>
 
-<!-- Esfera média -->
-<circle cx="60" cy="60" r="24"
-  stroke="url(#orig)"
-  stroke-width="2.2"
-  fill="none"/>
+            <!-- Esfera média (original) -->
+            <circle cx="60" cy="60" r="24"
+              stroke="url(#origV2_2)"
+              stroke-width="2.2"
+              fill="none"
+              opacity="0.9"/>
 
-<!-- Anel externo -->
-<circle cx="60" cy="60" r="36"
-  stroke="url(#orig)"
-  stroke-width="1.9"
-  fill="none"
-  opacity="0.45"/>
+            <!-- Círculo maior (original) -->
+            <circle cx="60" cy="60" r="36"
+              stroke="url(#origV2_2)"
+              stroke-width="1.9"
+              fill="none"
+              opacity="0.45"/>
+          </svg>
+        </div>
 
-</svg>
-</div>
+        <p class="tagline">Mensagem do símbolo: <span>controle</span> + <span>inteligência</span> + <span>valor</span>.</p>
+        <div class="hr"></div>
 
-<div class="card">
+        <div class="kv">
+          <div class="k">Forma-base</div><div class="v">Losango (direção, comando, estrutura)</div>
+          <div class="k">Centro</div><div class="v">Núcleo dourado (valor, decisão, premium)</div>
+          <div class="k">Anéis</div><div class="v">Camadas (processo, sistema, previsibilidade)</div>
+          <div class="k">Aura</div><div class="v">Energia (presença, destaque, “produto vivo”)</div>
+        </div>
+      </div>
 
-<h2>1. Estrutura Geométrica</h2>
-<p>
-O losango representa <span class="highlight">estrutura, estratégia e controle</span>.  
-É uma forma estável, porém dinâmica, associada a precisão e direção.
-</p>
+      <!-- TESE -->
+      <div class="card">
+        <h2>Racional de Percepção (humano + neurociência)</h2>
+        <ul class="bullets">
+          <li><strong>Hierarquia instantânea</strong>: o olhar é puxado para o <span class="highlight">núcleo</span> (ponto de maior contraste), criando sensação de “centro de comando”.</li>
+          <li><strong>Confiança e tecnologia</strong>: azul/ciano e roxo são percebidos como <strong>inteligência, segurança e inovação</strong> (códigos visuais clássicos de software/fintech/IA).</li>
+          <li><strong>Valor e decisão</strong>: o dourado no centro sinaliza <strong>prioridade</strong>, “o que importa”, e ativa heurísticas de <strong>status/premium</strong>.</li>
+          <li><strong>Sistema robusto</strong>: anéis concêntricos comunicam <strong>processo</strong>, <strong>camadas</strong> e <strong>controle operacional</strong> (mente lê como “plataforma”).</li>
+          <li><strong>Presença sem agressividade</strong>: a luz por trás cria destaque e “vida”, mas preserva o símbolo limpo (luxo = controle + silêncio).</li>
+        </ul>
 
-<h2>2. Núcleo Ouro</h2>
-<p>
-O núcleo dourado simboliza <span class="highlight">valor, liderança e decisão estratégica</span>.  
-Neurocientificamente, o ouro ativa percepção de autoridade, escassez e alto valor.
-</p>
+        <div class="grid2">
+          <div class="mini">
+            <h3>O que o cérebro entende em 1s</h3>
+            <p>
+              <span class="ok">Tecnologia confiável</span> + <span class="ok">autoridade</span> + <span class="ok">produto premium</span>.
+              O centro domina a leitura e os anéis reforçam “plataforma / sistema”.
+            </p>
+          </div>
 
-<h2>3. Anéis Tecnológicos</h2>
-<p>
-Os anéis em degradê azul-roxo comunicam <span class="highlight">tecnologia, inteligência e inovação</span>.  
-Cores frias aumentam percepção de confiança e segurança.
-</p>
+          <div class="mini">
+            <h3>Posicionamento sugerido</h3>
+            <p>
+              “Automação e atendimento inteligente via WhatsApp, com padrão enterprise.”
+              <br/>Arquétipos: <strong>Governante</strong> (controle) + <strong>Mago</strong> (tecnologia).
+            </p>
+          </div>
+        </div>
 
-<h2>4. Luz por Trás</h2>
-<p>
-A aura suave atrás do símbolo reforça a ideia de <span class="highlight">energia controlada</span> e
-presença dominante sem agressividade visual.
-</p>
+        <div class="hr"></div>
 
-<h2>5. Posicionamento Transmitido</h2>
-<p>
-O logo comunica:
-</p>
-<ul>
-<li>Controle tecnológico premium</li>
-<li>Autoridade estratégica</li>
-<li>Inteligência aplicada</li>
-<li>Sistema robusto e confiável</li>
-</ul>
+        <h2>Regras mínimas de uso (pra ficar premium)</h2>
+        <div class="ruleGrid">
+          <div class="mini">
+            <h3><span class="ok">FAÇA</span></h3>
+            <p>
+              Use o símbolo com respiro (clear space) e fundo escuro/limpo.
+              Prefira aplicações com contraste alto e brilho controlado.
+              Mantenha proporção e centralização exatas.
+            </p>
+          </div>
+          <div class="mini">
+            <h3><span class="no">NÃO FAÇA</span></h3>
+            <p>
+              Não troque cores, não achate, não incline, não coloque sobre fundos poluídos,
+              não adicione contornos extras, não aplique sombras pesadas fora do padrão.
+            </p>
+          </div>
+        </div>
 
-<h2>6. Arquitetura de Marca</h2>
-<p>
-A marca Sansaflow se posiciona como:
-<br><br>
-<strong>“Tecnologia sob comando. Inteligência com direção.”</strong>
-</p>
+        <div class="section">
+          <h2>Assinatura verbal (opções curtas)</h2>
+          <ul class="bullets">
+            <li><strong>Sansaflow</strong> — Automação e atendimento inteligente via WhatsApp</li>
+            <li><strong>Sansaflow</strong> — Atendimento premium, operação sob controle</li>
+            <li><strong>Sansaflow</strong> — Tecnologia que converte, processo que escala</li>
+          </ul>
+        </div>
 
-</div>
+        <div class="footer">
+          <div>Documento: <strong>Tese do Logo</strong> • Versão: <strong>V2.2</strong></div>
+          <div>Uso: interno / brand guideline • Sansaflow © <span id="year"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-</div>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
