@@ -10,6 +10,12 @@
     --bg1:#0b1220;
     --bg2:#1b1550;
     --bg3:#0b1220;
+
+    /* ============================
+       CONTROLE DO LOSANGO (GLOBAL)
+       ============================ */
+    --diamondCenter: 60;   /* NÃO mexa (centro do SVG) */
+    --diamondRadius: 56;   /* 56 = mantém exatamente: 60,4 116,60 60,116 4,60 */
   }
 
   body{
@@ -141,8 +147,9 @@
               </linearGradient>
             </defs>
 
-            <!-- LOSANGO MAIOR (com folga): vertices mais externos -->
-            <polygon points="60,4 116,60 60,116 4,60"
+            <!-- LOSANGO (AGORA CONTROLADO POR VARIÁVEL, SEM MUDAR DESIGN) -->
+            <polygon id="diamondV1"
+              points="60,4 116,60 60,116 4,60"
               fill="none"
               stroke="url(#goldV1)"
               stroke-width="4.5"
@@ -192,8 +199,9 @@
               </linearGradient>
             </defs>
 
-            <!-- Losango (original) -->
-            <polygon points="60,4 116,60 60,116 4,60"
+            <!-- Losango (AGORA CONTROLADO POR VARIÁVEL, SEM MUDAR DESIGN) -->
+            <polygon id="diamondV2"
+              points="60,4 116,60 60,116 4,60"
               fill="none"
               stroke="url(#origV2)"
               stroke-width="4.5"
@@ -243,8 +251,9 @@
               </linearGradient>
             </defs>
 
-            <!-- Losango (original) -->
-            <polygon points="60,4 116,60 60,116 4,60"
+            <!-- Losango (AGORA CONTROLADO POR VARIÁVEL, SEM MUDAR DESIGN) -->
+            <polygon id="diamondV3"
+              points="60,4 116,60 60,116 4,60"
               fill="none"
               stroke="url(#origV3)"
               stroke-width="4.5"
@@ -273,5 +282,28 @@
 
     </div>
   </div>
+
+  <script>
+    // Lê as variáveis do :root
+    const styles = getComputedStyle(document.documentElement);
+    const center = parseFloat(styles.getPropertyValue('--diamondCenter')) || 60;
+    const radius = parseFloat(styles.getPropertyValue('--diamondRadius')) || 56;
+
+    function setDiamondPoints(elId, c, r){
+      const top    = `${c},${c - r}`;
+      const right  = `${c + r},${c}`;
+      const bottom = `${c},${c + r}`;
+      const left   = `${c - r},${c}`;
+      const points = `${top} ${right} ${bottom} ${left}`;
+
+      const el = document.getElementById(elId);
+      if(el) el.setAttribute('points', points);
+    }
+
+    // Aplica nas 3 variações
+    setDiamondPoints('diamondV1', center, radius);
+    setDiamondPoints('diamondV2', center, radius);
+    setDiamondPoints('diamondV3', center, radius);
+  </script>
 </body>
 </html>
