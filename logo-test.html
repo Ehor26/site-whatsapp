@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sansaflow - 9 Logos (com luz)</title>
+<title>Sansaflow - 9 Logos (luz com controle)</title>
 
 <style>
   :root{
     --bg1:#0b1220;
     --bg2:#1b1550;
     --bg3:#0b1220;
+
+    /* CONTROLES (atualizados via sliders no JS) */
+    --shineOpacity: .85;    /* força geral da luz */
+    --shinePeak: .95;       /* pico (centro do feixe) */
+    --shineWide: 52%;       /* largura do feixe (maior = mais largo) */
   }
 
   body{
@@ -42,16 +47,21 @@
   .subtitle{
     text-align:center;
     opacity:.78;
-    margin:0 0 32px;
+    margin:0 0 22px;
+  }
+
+  .controls{
+    display:grid;
+    gap:12px;
+    margin:0 auto 34px;
+    max-width:920px;
   }
 
   .controlBox{
     background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.14);
     border-radius:18px;
-    padding:18px 16px 16px;
-    margin:0 auto 34px;
-    max-width:820px;
+    padding:14px 16px 12px;
     backdrop-filter: blur(14px);
   }
 
@@ -64,9 +74,10 @@
   }
 
   .controlLabel{
-    font-weight:800;
+    font-weight:900;
     letter-spacing:.2px;
     opacity:.92;
+    white-space:nowrap;
   }
 
   input[type=range]{
@@ -74,7 +85,6 @@
     max-width:86vw;
   }
 
-  /* 3 colunas, cada uma com 3 cards (um abaixo do outro) */
   .cols{
     display:grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -130,9 +140,14 @@
     padding: 10px 0 4px;
   }
 
-  /* Glow global do SVG */
   svg{
     filter: drop-shadow(0 0 18px rgba(109,40,217,.55));
+  }
+
+  /* ====== LUZ CONTROLÁVEL (classe única) ====== */
+  .shineWrap{
+    mix-blend-mode: screen;
+    opacity: var(--shineOpacity);
   }
 
   /* responsivo */
@@ -145,13 +160,31 @@
 <body>
 <div class="wrap">
   <h1 class="title">Sansaflow — 9 Logos (Luz)</h1>
-  <p class="subtitle">Tamanho do losango via slider + 3 variações de luz para cada versão (V1, V2, V3).</p>
+  <p class="subtitle">Tamanho do losango + intensidade da luz (slider). Não altera logos nem cores.</p>
 
-  <div class="controlBox">
-    <div class="controlRow">
-      <div class="controlLabel">Tamanho do Losango: <span id="sizeValue">60</span></div>
-      <input type="range" min="40" max="70" value="60" id="diamondSlider">
+  <div class="controls">
+
+    <div class="controlBox">
+      <div class="controlRow">
+        <div class="controlLabel">Tamanho do Losango: <span id="sizeValue">60</span></div>
+        <input type="range" min="40" max="70" value="60" id="diamondSlider">
+      </div>
     </div>
+
+    <div class="controlBox">
+      <div class="controlRow">
+        <div class="controlLabel">Intensidade da Luz: <span id="shineValue">85%</span></div>
+        <input type="range" min="10" max="140" value="85" id="shineSlider">
+      </div>
+    </div>
+
+    <div class="controlBox">
+      <div class="controlRow">
+        <div class="controlLabel">Largura da Luz: <span id="wideValue">52%</span></div>
+        <input type="range" min="30" max="80" value="52" id="wideSlider">
+      </div>
+    </div>
+
   </div>
 
   <div class="cols">
@@ -165,26 +198,24 @@
         <div class="logoBox">
           <svg width="180" height="180" viewBox="-10 -10 140 140" aria-label="Logo V1.1">
             <defs>
-              <!-- Degradê ORIGINAL (esferas) -->
               <linearGradient id="origV1_11" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#7c3aed"/>
                 <stop offset="55%" stop-color="#2563eb"/>
                 <stop offset="100%" stop-color="#22d3ee"/>
               </linearGradient>
 
-              <!-- Degradê OURO (losango) -->
               <linearGradient id="goldV1_11" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#FFD700"/>
                 <stop offset="50%" stop-color="#FFB800"/>
                 <stop offset="100%" stop-color="#F59E0B"/>
               </linearGradient>
 
-              <!-- Luz -->
+              <!-- Luz (parametrizada por CSS vars) -->
               <linearGradient id="shineGradV1_11" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="45%" stop-color="rgba(255,255,255,0.0)"/>
-                <stop offset="55%" stop-color="rgba(255,255,255,0.75)"/>
-                <stop offset="65%" stop-color="rgba(255,255,255,0.0)"/>
+                <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
+                <stop class="shineMidStop" offset="55%" stop-color="rgba(255,255,255,0.95)"/>
+                <stop offset="65%" stop-color="rgba(255,255,255,0)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -193,9 +224,8 @@
               </clipPath>
             </defs>
 
-            <!-- Base -->
             <g clip-path="url(#clipAllV1_11)">
-              <polygon class="diamond diamondV1" id="diamondV1_11"
+              <polygon class="diamond" id="diamondV1_11"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#goldV1_11)" stroke-width="4.5" opacity="0.95"/>
 
@@ -203,9 +233,9 @@
               <circle cx="60" cy="60" r="24" stroke="url(#origV1_11)" stroke-width="2.2" fill="none" opacity="0.9"/>
               <circle cx="60" cy="60" r="36" stroke="url(#origV1_11)" stroke-width="1.9" fill="none" opacity="0.45"/>
 
-              <!-- LUZ POR CIMA -->
-              <g style="mix-blend-mode:screen; opacity:.85">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV1_11)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV1_11)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
@@ -235,7 +265,7 @@
 
               <linearGradient id="shineGradV1_12" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0.75)"/>
+                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -246,16 +276,15 @@
 
             <g clip-path="url(#clipAllV1_12)">
 
-              <!-- LUZ POR TRÁS -->
-              <g style="mix-blend-mode:screen; opacity:.75">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV1_12)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV1_12)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
               </g>
 
-              <!-- Logo (na frente) -->
-              <polygon class="diamond diamondV1" id="diamondV1_12"
+              <polygon class="diamond" id="diamondV1_12"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#goldV1_12)" stroke-width="4.5" opacity="0.95"/>
 
@@ -267,7 +296,7 @@
         </div>
       </div>
 
-      <!-- V1.3: luz por dentro (entre losango e círculos) -->
+      <!-- V1.3: luz por dentro -->
       <div class="card">
         <div class="label">V1.3 — Losango ouro (luz por dentro)</div>
         <div class="logoBox">
@@ -287,7 +316,7 @@
 
               <linearGradient id="shineGradV1_13" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0.75)"/>
+                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -297,20 +326,18 @@
             </defs>
 
             <g clip-path="url(#clipAllV1_13)">
-              <!-- Losango -->
-              <polygon class="diamond diamondV1" id="diamondV1_13"
+              <polygon class="diamond" id="diamondV1_13"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#goldV1_13)" stroke-width="4.5" opacity="0.95"/>
 
-              <!-- LUZ ENTRE LOSANGO E CÍRCULOS -->
-              <g style="mix-blend-mode:screen; opacity:.75">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV1_13)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV1_13)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
               </g>
 
-              <!-- Círculos (por cima da luz) -->
               <circle cx="60" cy="60" r="9.5" fill="url(#origV1_13)"/>
               <circle cx="60" cy="60" r="24" stroke="url(#origV1_13)" stroke-width="2.2" fill="none" opacity="0.9"/>
               <circle cx="60" cy="60" r="36" stroke="url(#origV1_13)" stroke-width="1.9" fill="none" opacity="0.45"/>
@@ -321,11 +348,9 @@
 
     </div>
 
-
     <!-- ===================== COLUNA V2 ===================== -->
     <div class="col">
 
-      <!-- V2.1 -->
       <div class="card">
         <div class="label">V2.1 — Centro ouro (luz por cima)</div>
         <div class="logoBox">
@@ -345,7 +370,9 @@
 
               <linearGradient id="shineGradV2_21" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0.75)"/>
+                <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
+                <stop class="shineMidStop" offset="55%" stop-color="rgba(255,255,255,0.95)"/>
+                <stop offset="65%" stop-color="rgba(255,255,255,0)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -355,7 +382,7 @@
             </defs>
 
             <g clip-path="url(#clipAllV2_21)">
-              <polygon class="diamond diamondV2" id="diamondV2_21"
+              <polygon class="diamond" id="diamondV2_21"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#origV2_21)" stroke-width="4.5" opacity="0.95"/>
 
@@ -363,8 +390,9 @@
               <circle cx="60" cy="60" r="24" stroke="url(#origV2_21)" stroke-width="2.2" fill="none" opacity="0.9"/>
               <circle cx="60" cy="60" r="36" stroke="url(#origV2_21)" stroke-width="1.9" fill="none" opacity="0.45"/>
 
-              <g style="mix-blend-mode:screen; opacity:.85">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV2_21)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV2_21)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
@@ -374,7 +402,6 @@
         </div>
       </div>
 
-      <!-- V2.2 -->
       <div class="card">
         <div class="label">V2.2 — Centro ouro (luz por trás)</div>
         <div class="logoBox">
@@ -394,7 +421,7 @@
 
               <linearGradient id="shineGradV2_22" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0.75)"/>
+                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -404,15 +431,15 @@
             </defs>
 
             <g clip-path="url(#clipAllV2_22)">
-
-              <g style="mix-blend-mode:screen; opacity:.75">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV2_22)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV2_22)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
               </g>
 
-              <polygon class="diamond diamondV2" id="diamondV2_22"
+              <polygon class="diamond" id="diamondV2_22"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#origV2_22)" stroke-width="4.5" opacity="0.95"/>
 
@@ -424,7 +451,6 @@
         </div>
       </div>
 
-      <!-- V2.3 -->
       <div class="card">
         <div class="label">V2.3 — Centro ouro (luz por dentro)</div>
         <div class="logoBox">
@@ -444,7 +470,7 @@
 
               <linearGradient id="shineGradV2_23" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0.75)"/>
+                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -454,12 +480,13 @@
             </defs>
 
             <g clip-path="url(#clipAllV2_23)">
-              <polygon class="diamond diamondV2" id="diamondV2_23"
+              <polygon class="diamond" id="diamondV2_23"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#origV2_23)" stroke-width="4.5" opacity="0.95"/>
 
-              <g style="mix-blend-mode:screen; opacity:.75">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV2_23)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV2_23)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
@@ -475,11 +502,9 @@
 
     </div>
 
-
     <!-- ===================== COLUNA V3 ===================== -->
     <div class="col">
 
-      <!-- V3.1 -->
       <div class="card">
         <div class="label">V3.1 — Anel externo ouro (luz por cima)</div>
         <div class="logoBox">
@@ -499,7 +524,9 @@
 
               <linearGradient id="shineGradV3_31" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0.75)"/>
+                <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
+                <stop class="shineMidStop" offset="55%" stop-color="rgba(255,255,255,0.95)"/>
+                <stop offset="65%" stop-color="rgba(255,255,255,0)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -509,7 +536,7 @@
             </defs>
 
             <g clip-path="url(#clipAllV3_31)">
-              <polygon class="diamond diamondV3" id="diamondV3_31"
+              <polygon class="diamond" id="diamondV3_31"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#origV3_31)" stroke-width="4.5" opacity="0.95"/>
 
@@ -517,8 +544,9 @@
               <circle cx="60" cy="60" r="24" stroke="url(#origV3_31)" stroke-width="2.2" fill="none" opacity="0.9"/>
               <circle cx="60" cy="60" r="36" stroke="url(#goldV3_31)" stroke-width="2.2" fill="none" opacity="0.65"/>
 
-              <g style="mix-blend-mode:screen; opacity:.85">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV3_31)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV3_31)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
@@ -528,7 +556,6 @@
         </div>
       </div>
 
-      <!-- V3.2 -->
       <div class="card">
         <div class="label">V3.2 — Anel externo ouro (luz por trás)</div>
         <div class="logoBox">
@@ -548,7 +575,7 @@
 
               <linearGradient id="shineGradV3_32" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0.75)"/>
+                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -558,15 +585,15 @@
             </defs>
 
             <g clip-path="url(#clipAllV3_32)">
-
-              <g style="mix-blend-mode:screen; opacity:.75">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV3_32)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV3_32)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
               </g>
 
-              <polygon class="diamond diamondV3" id="diamondV3_32"
+              <polygon class="diamond" id="diamondV3_32"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#origV3_32)" stroke-width="4.5" opacity="0.95"/>
 
@@ -578,7 +605,6 @@
         </div>
       </div>
 
-      <!-- V3.3 -->
       <div class="card">
         <div class="label">V3.3 — Anel externo ouro (luz por dentro)</div>
         <div class="logoBox">
@@ -598,7 +624,7 @@
 
               <linearGradient id="shineGradV3_33" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-                <stop offset="50%" stop-color="rgba(255,255,255,0.75)"/>
+                <stop class="shineMidStop" offset="50%" stop-color="rgba(255,255,255,0.95)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
               </linearGradient>
 
@@ -608,12 +634,13 @@
             </defs>
 
             <g clip-path="url(#clipAllV3_33)">
-              <polygon class="diamond diamondV3" id="diamondV3_33"
+              <polygon class="diamond" id="diamondV3_33"
                 points="60,0 120,60 60,120 0,60"
                 fill="none" stroke="url(#origV3_33)" stroke-width="4.5" opacity="0.95"/>
 
-              <g style="mix-blend-mode:screen; opacity:.75">
-                <rect x="-120" y="-120" width="260" height="60" fill="url(#shineGradV3_33)" transform="rotate(25 60 60)">
+              <g class="shineWrap">
+                <rect class="shineRect" x="-120" y="-120" width="260" height="60"
+                      fill="url(#shineGradV3_33)" transform="rotate(25 60 60)">
                   <animateTransform attributeName="transform" type="translate"
                     values="-140 -110; 140 -110" dur="2.6s" repeatCount="indefinite"/>
                 </rect>
@@ -636,20 +663,59 @@
   const slider = document.getElementById("diamondSlider");
   const sizeValue = document.getElementById("sizeValue");
 
-  // viewBox agora tem padding (-10..130), então com stroke não corta mais.
-  // centro = 60; raio do losango = sliderValue (ex.: 60 fica perfeito e sem cortar)
+  const shineSlider = document.getElementById("shineSlider");
+  const shineValue = document.getElementById("shineValue");
+
+  const wideSlider = document.getElementById("wideSlider");
+  const wideValue = document.getElementById("wideValue");
+
   function updateDiamond(radius){
-    const center = 60;
-
-    const top    = `${center},${center - radius}`;
-    const right  = `${center + radius},${center}`;
-    const bottom = `${center},${center + radius}`;
-    const left   = `${center - radius},${center}`;
-
+    const c = 60;
+    const top    = `${c},${c - radius}`;
+    const right  = `${c + radius},${c}`;
+    const bottom = `${c},${c + radius}`;
+    const left   = `${c - radius},${c}`;
     const points = `${top} ${right} ${bottom} ${left}`;
 
-    document.querySelectorAll(".diamond").forEach(el => {
-      el.setAttribute("points", points);
+    document.querySelectorAll(".diamond").forEach(el => el.setAttribute("points", points));
+  }
+
+  function updateShineIntensity(percent){
+    // 10..140 (%). Converte para opacidade e pico.
+    const o = Math.max(0.10, Math.min(1.40, percent / 100));
+    const baseOpacity = Math.min(1.0, 0.25 + o * 0.65);     // 0.315..1.0
+    const peak = Math.min(1.0, 0.40 + o * 0.55);            // 0.455..1.0
+    document.documentElement.style.setProperty("--shineOpacity", baseOpacity.toFixed(2));
+    document.documentElement.style.setProperty("--shinePeak", peak.toFixed(2));
+
+    // Atualiza o stop central de TODOS os gradientes (já existe como rgba(255,255,255,0.95) no HTML)
+    document.querySelectorAll(".shineMidStop").forEach(stop => {
+      stop.setAttribute("stop-color", `rgba(255,255,255,${peak.toFixed(2)})`);
+    });
+  }
+
+  function updateShineWidth(wide){
+    // wide em % (30..80) -> ajusta a “zona” de brilho
+    // implementado movendo as posições 45/55/65 para ficar mais largo/estreito (só nos gradientes com 5 stops)
+    wideValue.innerText = `${wide}%`;
+    const w = Math.max(30, Math.min(80, wide));
+
+    // Mapeia: w=30 => faixa estreita (49/51/53), w=80 => faixa larga (40/60/80)
+    const left = Math.round(55 - (w - 30) * (15 / 50));   // 55 -> 40
+    const mid  = 55;
+    const right= Math.round(55 + (w - 30) * (25 / 50));   // 55 -> 80
+    const left2= Math.max(0, left - 10);
+
+    // Para cada gradient de "5 stops" (tem offsets 0,45,55,65,100)
+    document.querySelectorAll('linearGradient[id^="shineGrad"]').forEach(g => {
+      const stops = g.querySelectorAll("stop");
+      if (stops.length === 5) {
+        stops[1].setAttribute("offset", `${left2}%`);
+        stops[2].setAttribute("offset", `${left}%`);
+        stops[3].setAttribute("offset", `${right}%`);
+      } else if (stops.length === 3) {
+        // para o de 3 stops: 0 / 50 / 100 -> mantém, porque já funciona bem
+      }
     });
   }
 
@@ -658,7 +724,20 @@
     updateDiamond(parseInt(this.value, 10));
   });
 
+  shineSlider.addEventListener("input", function(){
+    shineValue.innerText = `${this.value}%`;
+    updateShineIntensity(parseInt(this.value, 10));
+  });
+
+  wideSlider.addEventListener("input", function(){
+    updateShineWidth(parseInt(this.value, 10));
+  });
+
+  // init
   updateDiamond(parseInt(slider.value, 10));
+  shineValue.innerText = `${shineSlider.value}%`;
+  updateShineIntensity(parseInt(shineSlider.value, 10));
+  updateShineWidth(parseInt(wideSlider.value, 10));
 </script>
 </body>
 </html>
